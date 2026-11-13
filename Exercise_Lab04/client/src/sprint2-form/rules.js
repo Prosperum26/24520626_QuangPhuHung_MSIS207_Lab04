@@ -73,3 +73,17 @@ export function evaluateErrors(values, rules) {
   }
   return errors;
 }
+
+/**
+ * Đổi values (chuỗi) đã hợp lệ thành bản ghi người: cắt khoảng trắng, age và iq thành số.
+ * Chỉ gọi khi evaluateErrors trả {}.
+ * @param {Values} values
+ */
+export function toPerson(values) {
+  return Object.freeze({
+    name: values.name.trim(),
+    email: values.email.trim(),
+    age: Number(values.age.trim()),
+    iq: Number(values.iq.trim()),
+  });
+}

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { RULES, INITIAL_VALUES, evaluateErrors } from './rules.js';
+import { RULES, INITIAL_VALUES, evaluateErrors, toPerson } from './rules.js';
 
 const valid = { name: 'Ada Lovelace', email: 'ada@example.com', age: '36', iq: '170' };
 const errorsOf = (patch) => evaluateErrors({ ...valid, ...patch }, RULES);
@@ -106,5 +106,23 @@ describe('iq', () => {
     expect(errorsOf({ iq: '170.5' }).iq).toBeUndefined();
     expect(errorsOf({ iq: '300' }).iq).toBeUndefined();
     expect(errorsOf({ iq: '300.1' }).iq).toBe('IQ từ 50 đến 300');
+  });
+});
+
+describe('toPerson', () => {
+  it('cắt khoảng trắng chuỗi và đổi age, iq sang số', () => {
+    expect(toPerson({ name: '  Ada ', email: ' ada@example.com ', age: ' 36 ', iq: '170.5' })).toEqual({
+      name: 'Ada',
+      email: 'ada@example.com',
+      age: 36,
+      iq: 170.5,
+    });
+  });
+
+  it('trả object mới đóng băng, không đổi đầu vào', () => {
+    const values = Object.freeze({ ...valid });
+    const person = toPerson(values);
+    expect(person).not.toBe(values);
+    expect(Object.isFrozen(person)).toBe(true);
   });
 });
