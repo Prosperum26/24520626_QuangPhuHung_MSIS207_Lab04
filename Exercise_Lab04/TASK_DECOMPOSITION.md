@@ -194,9 +194,9 @@ Mỗi luật kiểm theo thứ tự, trả về thông báo **đầu tiên** kh�
 | S2-03 | `FormProvider`: `values`, `touched`, `submitted`; `errors` dẫn xuất | `FormProvider.jsx` | `grep -c useEffect` = 0 | [x] |
 | S2-04 | `SimpleForm` khung: `<form noValidate>` + `<fieldset>` + nút gửi | `SimpleForm.jsx` | Test: render không lỗi, không warning | [x] |
 | S2-05 | **Commit C5**: `feat: form context` (S2-02 đến S2-04); luật tách commit riêng `feat(sprint2): add pure validation rules` (S2-01) | — | Mỗi commit chỉ gồm file của task đó | [x] |
-| S2-06 | `InputField`: `useId`, `<label htmlFor>`, `aria-invalid`, `aria-describedby`, `<p id>` lỗi (D6, D8, D9) | `InputField.jsx` | Test: gõ sai rồi blur thì thấy lỗi và `aria-describedby` trỏ đúng `id`; mở trang chưa có lỗi | [ ] |
-| S2-07 | Mỗi `InputField` có `id` khác nhau | `InputField.test.jsx` | Test: bốn field cho bốn `id` phân biệt | [ ] |
-| S2-08 | **Commit C6**: `feat: input field validation` | — | Profiler: một phím gõ = một lần render pass; ảnh vào `evidence/` | [ ] |
+| S2-06 | `InputField`: `useId`, `<label htmlFor>`, `aria-invalid`, `aria-describedby`, `<p id>` lỗi (D6, D8, D9) | `InputField.jsx` | Test: gõ sai rồi blur thì thấy lỗi và `aria-describedby` trỏ đúng `id`; mở trang chưa có lỗi | [x] |
+| S2-07 | Mỗi `InputField` có `id` khác nhau | `InputField.test.jsx` | Test: bốn field cho bốn `id` phân biệt | [x] |
+| S2-08 | **Commit C6**: `feat: input field validation` (S2-06 tách commit riêng `feat(sprint2): add accessible InputField bound to form context`) | — | Test tự động đã xác nhận một phím = một commit render (`Profiler` trong `SimpleForm.test.jsx`); **còn chờ ảnh React DevTools Profiler của bạn** vào `evidence/` | [ ] |
 | S2-09 | `onSubmit`: `preventDefault`; còn lỗi thì `submitted=true` và `role="alert"` tóm tắt; hợp lệ thì lưu `submittedData` | `SimpleForm.jsx` | Test: gửi form trống ra tóm tắt lỗi; không có dữ liệu hiển thị | [ ] |
 | S2-10 | `ShowData`: `<dl>` từ `Object.entries`, chuyển `age` và `iq` sang số | `ShowData.jsx` | Test: gửi form hợp lệ hiện đủ bốn cặp `dt/dd` | [ ] |
 | S2-11 | **Commit C7**: `feat: inspector output` | — | `npm test`, `npm run lint` sạch; bàn phím điều khiển được toàn bộ form | [ ] |
