@@ -2,6 +2,7 @@ import { useId, useState } from 'react';
 import { CHANNELS } from './forumApi.js';
 import { ChannelSwitcher } from './ChannelSwitcher.jsx';
 import { MessageList, MessageListSkeleton } from './MessageList.jsx';
+import PostForm from './PostForm.jsx';
 import { useForumMessages } from './useForumMessages.js';
 import styles from './ForumPage.module.css';
 
@@ -9,7 +10,7 @@ import styles from './ForumPage.module.css';
 export default function ForumPage() {
   const headingId = useId();
   const [channel, setChannel] = useState(CHANNELS[0]);
-  const { messages, status, error, retry } = useForumMessages(channel);
+  const { messages, status, error, postMessage, retry } = useForumMessages(channel);
 
   return (
     <section aria-labelledby={headingId} className={styles.panel}>
@@ -28,6 +29,7 @@ export default function ForumPage() {
         )}
         {status === 'success' && <MessageList messages={messages} />}
       </div>
+      <PostForm onPost={postMessage} />
     </section>
   );
 }

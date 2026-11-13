@@ -133,3 +133,51 @@ describe('ForumPage: lỗi và thử lại', () => {
     expect(error).not.toHaveBeenCalled();
   });
 });
+
+describe('ForumPage: gửi tin', () => {
+  it('gửi tin hợp lệ thì tin mới xuất hiện trong danh sách (POST rồi tải lại), tin cũ giữ nguyên', async () => {
+    const forum = installFakeForum(INITIAL);
+    const user = userEvent.setup();
+    render(<ForumPage />);
+    await screen.findByText('Quỹ đạo đã tính lại');
+
+    await user.type(screen.getByLabelText('Tên'), 'Ada');
+    await user.type(screen.getByLabelText('Nội dung'), 'Xin chào kênh nasa');
+    await user.click(screen.getByRole('button', { name: /gửi tin nhắn/i }));
+
+    expect(await screen.findByText('Xin chào kênh nasa')).toBeInTheDocument();
+    expect(screen.getByText('Quỹ đạo đã tính lại')).toBeInTheDocument();
+    const postCall = forum.fetchMock.mock.calls.find(([, init]) => init?.method === 'POST');
+    expect(postCall[0]).toMatch(/\/api\/channels\/nasa\/messages$/);
+    expect(JSON.parse(postCall[1].body)).toEqual({ author: 'Ada', text: 'Xin chào kênh nasa' });
+    expect(screen.getByLabelText('Nội dung')).toHaveValue('');
+  });
+
+  it('gửi vào kênh đang chọn (không phải kênh mặc định)', async () => {
+    const forum = installFakeForum(INITIAL);
+    const user = userEvent.setup();
+    render(<ForumPage />);
+    await user.click(screen.getByRole('button', { name: 'esports-tribunal' }));
+    await screen.findByText('Hồ sơ đã nộp');
+    await user.type(screen.getByLabelText('Tên'), 'TanVuu');
+    await user.type(screen.getByLabelText('Nội dung'), 'Đã đối chiếu log');
+    await user.click(screen.getByRole('button', { name: /gửi tin nhắn/i }));
+    expect(await screen.findByText('Đã đối chiếu log')).toBeInTheDocument();
+    expect(forum.data['esports-tribunal']).toHaveLength(2);
+    expect(forum.data.nasa).toHaveLength(2);
+  });
+
+  it('server từ chối khi gửi: hiện lỗi ngay trong form và giữ nội dung đã gõ', async () => {
+    const forum = installFakeForum(INITIAL);
+    const user = userEvent.setup();
+    render(<ForumPage />);
+    await screen.findByText('Quỹ đạo đã tính lại');
+    forum.state.fail = 400;
+    await user.type(screen.getByLabelText('Tên'), 'Ada');
+    await user.type(screen.getByLabelText('Nội dung'), 'Hello');
+    await user.click(screen.getByRole('button', { name: /gửi tin nhắn/i }));
+    expect(await screen.findByRole('alert')).toHaveTextContent(/không gửi được/i);
+    expect(screen.getByLabelText('Nội dung')).toHaveValue('Hello');
+    expect(screen.getByText('Quỹ đạo đã tính lại')).toBeInTheDocument();
+  });
+});
