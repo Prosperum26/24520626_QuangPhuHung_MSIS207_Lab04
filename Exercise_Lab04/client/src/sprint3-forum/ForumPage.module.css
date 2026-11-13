@@ -1,0 +1,56 @@
+/* Cùng kiểu panel với Sprint 1 và 2 (bề mặt trắng mờ, viền nhạt, bóng nhẹ) theo phong cách Lab03. */
+.panel {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 48rem;
+  padding: var(--space-5);
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.panel h2 {
+  margin: 0;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  line-height: 1.2;
+}
+
+/* Giữ chiều cao tối thiểu để đổi kênh hay tải xong không làm nội dung bên dưới nhảy (CLS). */
+.board {
+  min-height: 14rem;
+}
+
+.error {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-danger-tint);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-card);
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+.error p {
+  margin: 0;
+}
+
+.retry {
+  justify-self: start;
+  min-height: var(--control-height);
+  padding: 0 var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-control);
+  color: var(--color-danger);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.retry:hover {
+  background: var(--color-danger);
+  color: var(--color-surface);
+}

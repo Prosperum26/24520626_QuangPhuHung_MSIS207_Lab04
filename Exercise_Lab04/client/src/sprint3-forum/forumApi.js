@@ -47,3 +47,6 @@ export async function sendMessage(channel, payload) {
   }
   return res.json();
 }
+
+// Ba kênh hợp lệ, trùng với server (store.js) và shared/api-contract.md. Thêm kênh phải sửa cả hai nơi.
+export const CHANNELS = Object.freeze(['nasa', 'esports-tribunal', 'notNasa']);

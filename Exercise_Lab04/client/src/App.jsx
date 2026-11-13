@@ -2,11 +2,11 @@ import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 import { AppLayout } from './AppLayout.jsx';
 import { NotFound } from './NotFound.jsx';
-import { Placeholder } from './Placeholder.jsx';
 import { PEOPLE } from './sprint1-router/people.js';
 import PeopleLayout from './sprint1-router/PeopleLayout.jsx';
 import { PeopleIndex } from './sprint1-router/PeopleIndex.jsx';
 import SimpleForm from './sprint2-form/SimpleForm.jsx';
+import ForumPage from './sprint3-forum/ForumPage.jsx';
 
 // Code splitting theo route: PersonDetail thành chunk riêng, chỉ tải khi vào /people/:id.
 // Suspense nằm ở PeopleLayout, quanh <Outlet/>.
@@ -23,7 +23,7 @@ export function App() {
           <Route path=":id" element={<PersonDetail people={PEOPLE} />} />
         </Route>
         <Route path="form" element={<SimpleForm />} />
-        <Route path="forum" element={<Placeholder title="Forum" sprint="Sprint 3" />} />
+        <Route path="forum" element={<ForumPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
