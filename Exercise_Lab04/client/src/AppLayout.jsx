@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router';
+import styles from './AppLayout.module.css';
 
 const SECTIONS = [
   { to: '/people', label: 'People' },
@@ -6,15 +7,15 @@ const SECTIONS = [
   { to: '/forum', label: 'Forum' },
 ];
 
-const linkClass = ({ isActive }) => (isActive ? 'active-link' : 'link');
+const linkClass = ({ isActive }) => (isActive ? styles.active : styles.link);
 
 export function AppLayout() {
   return (
-    <>
-      <header>
+    <div className={styles.page}>
+      <header className={styles.header}>
         <h1>Lab 04: Multi-Route SPA</h1>
         <nav aria-label="Chính">
-          <ul>
+          <ul className={styles.tabs}>
             {SECTIONS.map(({ to, label }) => (
               <li key={to}>
                 <NavLink to={to} className={linkClass}>
@@ -25,9 +26,9 @@ export function AppLayout() {
           </ul>
         </nav>
       </header>
-      <main>
+      <main className={styles.main}>
         <Outlet />
       </main>
-    </>
+    </div>
   );
 }

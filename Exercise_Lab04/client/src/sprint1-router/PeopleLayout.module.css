@@ -1,0 +1,76 @@
+/* Master-detail: danh sách bên trái, chi tiết bên phải. Dưới 40rem xếp một cột để 320px không tràn. */
+.frame {
+  display: grid;
+  gap: var(--space-5);
+  align-items: start;
+  min-width: 0;
+}
+
+@media (min-width: 40rem) {
+  .frame {
+    grid-template-columns: minmax(280px, 1fr) 2fr;
+  }
+}
+
+.sidebar,
+.content {
+  min-width: 0;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.content {
+  padding: var(--space-5);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link,
+.active {
+  display: flex;
+  align-items: center;
+  min-height: var(--control-height);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-control);
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.link:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgb(37 99 235 / 0.18);
+}
+
+/* Người đang chọn: nền accent và vạch trái dày, không chỉ dựa vào màu. */
+.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  border-left-width: 6px;
+  color: var(--color-on-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+
+  .link:hover {
+    transform: none;
+  }
+}

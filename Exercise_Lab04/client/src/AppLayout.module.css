@@ -1,0 +1,59 @@
+/* Phong cách nối tiếp Lab03 Ex2: bề mặt trắng mờ, viền nhạt, điểm nhấn xanh dương. */
+.page {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: clamp(var(--space-4), 4vw, 2rem);
+}
+
+.header {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link,
+.active {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-height);
+  padding: 0 var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link:hover {
+  border-color: var(--color-accent);
+}
+
+/* Trang hiện tại: nền accent và gạch chân, không chỉ dựa vào màu (WCAG 1.4.1). */
+.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.main {
+  min-width: 0;
+}

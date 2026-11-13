@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from 'react-router';
+import styles from './PeopleLayout.module.css';
 
-const linkClass = ({ isActive }) => (isActive ? 'active-link' : 'link');
+const linkClass = ({ isActive }) => (isActive ? styles.active : styles.link);
 
 /**
  * Khung master-detail: danh sách bên trái, <Outlet/> bên phải.
@@ -9,9 +10,9 @@ const linkClass = ({ isActive }) => (isActive ? 'active-link' : 'link');
  */
 export default function PeopleLayout({ people }) {
   return (
-    <div>
-      <nav aria-label="Danh sách người">
-        <ul>
+    <div className={styles.frame}>
+      <nav aria-label="Danh sách người" className={styles.sidebar}>
+        <ul className={styles.list}>
           {people.map((person) => (
             <li key={person.id}>
               <NavLink to={`/people/${person.id}`} className={linkClass}>
@@ -21,7 +22,7 @@ export default function PeopleLayout({ people }) {
           ))}
         </ul>
       </nav>
-      <section aria-label="Chi tiết">
+      <section aria-label="Chi tiết" className={styles.content}>
         <Outlet />
       </section>
     </div>
