@@ -76,3 +76,79 @@ describe('SimpleForm với bốn ô nhập', () => {
     expect(commits - before).toBe(4);
   });
 });
+
+describe('SimpleForm gửi form', () => {
+  async function fillValid(user) {
+    await user.type(screen.getByLabelText('Họ tên'), 'Ada Lovelace');
+    await user.type(screen.getByLabelText('Email'), 'ada@example.com');
+    await user.type(screen.getByLabelText('Tuổi'), '36');
+    await user.type(screen.getByLabelText('IQ'), '170.5');
+  }
+
+  it('gửi form trống: hiện tóm tắt role="alert", lộ lỗi mọi ô, đưa focus về ô lỗi đầu tiên, không có dữ liệu', async () => {
+    const user = userEvent.setup();
+    render(<SimpleForm />);
+    await user.click(screen.getByRole('button', { name: /thêm người/i }));
+    expect(screen.getByRole('alert')).toHaveTextContent(/còn lỗi/i);
+    expect(screen.getByText('Họ tên là bắt buộc')).toBeInTheDocument();
+    expect(screen.getByText('Email là bắt buộc')).toBeInTheDocument();
+    expect(screen.getByText('Tuổi là bắt buộc')).toBeInTheDocument();
+    expect(screen.getByText('IQ là bắt buộc')).toBeInTheDocument();
+    expect(screen.getByLabelText('Họ tên')).toHaveFocus();
+    expect(screen.queryByRole('heading', { name: /dữ liệu đã gửi/i })).not.toBeInTheDocument();
+  });
+
+  it('focus nhảy tới ô lỗi đầu tiên chứ không phải ô đầu tiên của form', async () => {
+    const user = userEvent.setup();
+    render(<SimpleForm />);
+    await user.type(screen.getByLabelText('Họ tên'), 'Ada Lovelace');
+    await user.type(screen.getByLabelText('Email'), 'ada@example.com');
+    await user.click(screen.getByRole('button', { name: /thêm người/i }));
+    expect(screen.getByLabelText('Tuổi')).toHaveFocus();
+  });
+
+  it('gửi form hợp lệ: hiện ShowData với age và iq là số, không còn alert', async () => {
+    const user = userEvent.setup();
+    render(<SimpleForm />);
+    await fillValid(user);
+    await user.click(screen.getByRole('button', { name: /thêm người/i }));
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: /dữ liệu đã gửi/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('term').map((el) => el.textContent)).toEqual(['name', 'email', 'age', 'iq']);
+    expect(screen.getAllByRole('definition').map((el) => el.textContent)).toEqual([
+      'Ada Lovelace',
+      'ada@example.com',
+      '36',
+      '170.5',
+    ]);
+  });
+
+  it('nhấn Enter trong một ô cũng gửi form (không tải lại trang)', async () => {
+    const user = userEvent.setup();
+    render(<SimpleForm />);
+    await fillValid(user);
+    await user.type(screen.getByLabelText('IQ'), '{Enter}');
+    expect(screen.getByRole('heading', { level: 3, name: /dữ liệu đã gửi/i })).toBeInTheDocument();
+  });
+
+  it('gửi lại khi đã sai thì xoá dữ liệu cũ, không để kết quả lỗi thời', async () => {
+    const user = userEvent.setup();
+    render(<SimpleForm />);
+    await fillValid(user);
+    await user.click(screen.getByRole('button', { name: /thêm người/i }));
+    expect(screen.getByRole('heading', { level: 3, name: /dữ liệu đã gửi/i })).toBeInTheDocument();
+    await user.clear(screen.getByLabelText('Email'));
+    await user.click(screen.getByRole('button', { name: /thêm người/i }));
+    expect(screen.queryByRole('heading', { level: 3, name: /dữ liệu đã gửi/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+  });
+
+  it('sửa hết lỗi thì tóm tắt alert tự biến mất (dẫn xuất từ submitted và isValid)', async () => {
+    const user = userEvent.setup();
+    render(<SimpleForm />);
+    await user.click(screen.getByRole('button', { name: /thêm người/i }));
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    await fillValid(user);
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+});
