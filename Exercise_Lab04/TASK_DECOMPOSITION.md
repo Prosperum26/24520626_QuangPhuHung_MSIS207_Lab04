@@ -54,7 +54,7 @@ Mỗi project chạy `npm` ngay trong folder của nó (như Lab03). Gốc repo 
 
 | # | Chỗ slide thiếu hoặc mâu thuẫn | Mình chọn | Lý do |
 |---|---|---|---|
-| D1 | Slide 2 dùng `createBrowserRouter`, slide 10 dùng `<Routes>` | Declarative: `<BrowserRouter>` + `<Routes>` | Khớp slide 4, 10, 33; ít khái niệm hơn khi bảo vệ |
+| D1 | Slide 2 dùng `createBrowserRouter`, slide 10 dùng `<Routes>` | Declarative: `<BrowserRouter>` + `<Routes>`, `react-router` ghim v7 | Khớp slide 4, 10, 33; ít khái niệm hơn khi bảo vệ |
 | D2 | Dữ liệu people không có trong slide | Sao chép `people.json` từ Lab03 Ex2 (`sp-1` đến `sp-7`, ID chuỗi) | ID là chuỗi nên `p.id === id` đúng; vẫn test `/people/sp-999` để chắc 404 |
 | D3 | `PersonDetail` slide hiện `Name` và `Role`, dữ liệu Lab03 chỉ có `name`, `age`, `iq` | Hiện `Name`, `Age`, `IQ` | Không bịa trường `role` |
 | D4 | Ba dạng API khác nhau (slide 16, 25, 26) | `/api/channels/:channel/messages` cho cả GET và POST | Slide 16 và 17 dùng từ "channel"; ghi vào [shared/api-contract.md](../shared/api-contract.md) trước khi code |
@@ -74,16 +74,28 @@ Mỗi project chạy `npm` ngay trong folder của nó (như Lab03). Gốc repo 
 
 | ID | Task | Gate | Trạng thái |
 |---|---|---|---|
-| S0-01 | Chốt D1 đến D15 với mình | Bạn trả lời "ok" hoặc sửa từng dòng | [ ] |
-| S0-02 | Viết [docs/project-rules.md](../docs/project-rules.md) và [Agents.md](../Agents.md) (chuyển từ Lab02/Lab03, chỉnh cho Lab04) | Hai file có nội dung, không còn dòng "chưa viết" | [ ] |
-| S0-03 | Viết [shared/api-contract.md](../shared/api-contract.md) theo mục 5.1 | Có đủ route, mã trạng thái, giới hạn field | [ ] |
-| S0-04 | `git init`, commit `docs: add context, rules, contract and WBS` | `git log` có commit đầu | [ ] |
-| S0-05 | Dựng `client/`: sao chép cấu hình Lab03 Ex2 (`vite.config.js`, `eslint.config.js`, `setup.js`, `tokens.css`), đổi `name`, thêm `react-router`, `npm install` | `npm test` và `npm run lint` chạy được trên khung rỗng | [ ] |
-| S0-06 | Dựng `server/`: `package.json` (`express`, `cors`; dev: `vitest`, `supertest`), script `dev`, `test` | `npm test` chạy được (0 test cũng được) | [ ] |
-| S0-07 | `.env.example` đã có; thêm `VITE_API_BASE` cho client | `.env` không nằm trong `git status` | [ ] |
-| S0-08 | `main.jsx` dùng `createRoot` + `StrictMode` + `BrowserRouter` | `npm run dev` hiện trang rỗng, không warning | [ ] |
+| S0-01 | Chốt D1 đến D15 với mình | Bạn trả lời "ok" | [x] |
+| S0-02 | Viết [docs/project-rules.md](../docs/project-rules.md) và [Agents.md](../Agents.md) (chuyển từ Lab03, chỉnh cho Lab04) | Hai file có nội dung, không còn dòng "chưa viết" | [x] |
+| S0-03 | Viết [shared/api-contract.md](../shared/api-contract.md) theo mục 6.2 | Có đủ route, mã trạng thái, giới hạn field | [x] |
+| S0-04 | `git init` và các commit tài liệu | `git log` đọc được từng bước | [x] |
+| S0-05 | Dựng `client/`: sao chép cấu hình Lab03 Ex2, đổi `name`, thêm `react-router` **ghim v7** (bản mới nhất là v8, `npm install react-router` không ghim sẽ kéo nhầm), `npm install` | `npm test`, `npm run lint`, `npm run build` đều sạch | [x] |
+| S0-06 | Dựng `server/`: `package.json` (`express`, `cors`; dev: `vitest`, `supertest`), script `dev`, `start`, `test` | `npm install` sạch; `npm test` chạy (0 test) | [x] |
+| S0-07 | `Exercise_Lab04/.env.example` (server và client dùng chung qua `envDir: '..'` và `--env-file-if-exists=../.env`) | `.env` không nằm trong `git status` | [x] |
+| S0-08 | `main.jsx` dùng `createRoot` + `StrictMode` + `BrowserRouter`; `App.jsx` là khung tạm | Test smoke xanh; build chạy | [x] |
 
-Commit C1: `chore: init react19 vite client, express server and rules`
+Các commit của Sprint 0 (đã tách nhỏ):
+
+| # | Message | Nội dung |
+|---|---|---|
+| 1 | `chore: scaffold lab04 repo structure` | `.gitignore`, `package.json`, `README.md`, `.env.example`, folder rỗng, WBS Homework |
+| 2 | `docs: add lab04 slide context` | `docs/Context.md` |
+| 3 | `docs: add exercise task decomposition` | WBS này |
+| 4 | `docs: add agent rules and project rules` | `Agents.md`, `docs/project-rules.md` |
+| 5 | `docs: define forum api contract` | `shared/api-contract.md` |
+| 6 | `chore(client): init react19 vite client with react-router v7` | `client/` |
+| 7 | `chore(server): init express server project` | `server/`, `Exercise_Lab04/.env.example` |
+| 8 | `docs: add run instructions to readme` | `README.md` |
+| 9 | `docs: tick sprint 0 in exercise wbs` | cập nhật WBS |
 
 ## 4. Sprint 1: Router (40-75 phút)
 
