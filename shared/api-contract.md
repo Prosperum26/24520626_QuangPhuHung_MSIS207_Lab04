@@ -53,7 +53,18 @@ Client **không** gửi `id` và `timestamp`; nếu có thì server bỏ qua.
 | Thiếu `author` hoặc `text`, không phải chuỗi, rỗng sau `trim` | `400` | `{ "error": "..." }` |
 | `author` dài hơn 40 hoặc `text` dài hơn 500 ký tự | `400` | `{ "error": "..." }` |
 | Body không phải JSON hợp lệ | `400` | `{ "error": "Invalid JSON" }` |
+| Body không phải JSON object (mảng, rỗng, không phải `application/json`) | `400` | `{ "error": "..." }` |
+| Body lớn hơn 10 KB | `413` | `{ "error": "Payload too large" }` |
 | Kênh không thuộc danh sách | `404` | `{ "error": "Unknown channel" }` |
+
+Kênh được kiểm **trước** body: kênh lạ luôn là `404`, kể cả khi body sai.
+
+### 3.3 Lỗi chung
+
+| Trường hợp | Mã | Body |
+|---|---|---|
+| Đường dẫn không có trong hợp đồng | `404` | `{ "error": "Not found" }` |
+| Lỗi không lường trước | `500` | `{ "error": "Internal server error" }` (không lộ chi tiết) |
 
 ## 4. Giới hạn dùng ở hai nơi
 
