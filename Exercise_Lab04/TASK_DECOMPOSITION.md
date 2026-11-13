@@ -189,11 +189,11 @@ Mỗi luật kiểm theo thứ tự, trả về thông báo **đầu tiên** kh�
 
 | ID | Task | File | Gate | Trạng thái |
 |---|---|---|---|---|
-| S2-01 | `rules` và `evaluateErrors` (hàm thuần) | `rules.js` (+ test) | Test: từng luật, biên 1/150 và 50/300, chuỗi rỗng, khoảng trắng | [ ] |
-| S2-02 | `FormContext.js` (`createContext`, `useFormContext` ném lỗi nếu thiếu Provider) | `FormContext.js` | Test: dùng hook ngoài Provider thì ném lỗi dễ hiểu | [ ] |
-| S2-03 | `FormProvider`: `values`, `touched`, `submitted`; `errors` dẫn xuất | `FormProvider.jsx` | `grep -c useEffect` = 0 | [ ] |
-| S2-04 | `SimpleForm` khung: `<form noValidate>` + `<fieldset>` + nút gửi | `SimpleForm.jsx` | Test: render không lỗi, không warning | [ ] |
-| S2-05 | **Commit C5**: `feat: form context` | — | S2-01 đến S2-04 | [ ] |
+| S2-01 | `rules` và `evaluateErrors` (hàm thuần) | `rules.js` (+ test) | Test: từng luật, biên 1/150 và 50/300, chuỗi rỗng, khoảng trắng | [x] |
+| S2-02 | `FormContext.js` (`createContext`, `useFormContext` ném lỗi nếu thiếu Provider) | `FormContext.js` | Test: dùng hook ngoài Provider thì ném lỗi dễ hiểu | [x] |
+| S2-03 | `FormProvider`: `values`, `touched`, `submitted`; `errors` dẫn xuất | `FormProvider.jsx` | `grep -c useEffect` = 0 | [x] |
+| S2-04 | `SimpleForm` khung: `<form noValidate>` + `<fieldset>` + nút gửi | `SimpleForm.jsx` | Test: render không lỗi, không warning | [x] |
+| S2-05 | **Commit C5**: `feat: form context` (S2-02 đến S2-04); luật tách commit riêng `feat(sprint2): add pure validation rules` (S2-01) | — | Mỗi commit chỉ gồm file của task đó | [x] |
 | S2-06 | `InputField`: `useId`, `<label htmlFor>`, `aria-invalid`, `aria-describedby`, `<p id>` lỗi (D6, D8, D9) | `InputField.jsx` | Test: gõ sai rồi blur thì thấy lỗi và `aria-describedby` trỏ đúng `id`; mở trang chưa có lỗi | [ ] |
 | S2-07 | Mỗi `InputField` có `id` khác nhau | `InputField.test.jsx` | Test: bốn field cho bốn `id` phân biệt | [ ] |
 | S2-08 | **Commit C6**: `feat: input field validation` | — | Profiler: một phím gõ = một lần render pass; ảnh vào `evidence/` | [ ] |
