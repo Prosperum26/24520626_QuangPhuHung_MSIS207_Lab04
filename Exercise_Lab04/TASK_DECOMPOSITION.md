@@ -163,7 +163,27 @@ evaluateErrors(values, rules)   // hàm thuần: -> { [field]: message }, chỉ 
 - Luật mặc định: `name` bắt buộc, 2 đến 60 ký tự sau `trim`; `email` có dạng `a@b.c`; `age` là số nguyên 1 đến 150; `iq` là số 50 đến 300.
 - Giá trị trong state luôn là chuỗi (đúng với `<input>`); chuyển sang số ở bước hiển thị.
 - `FormProvider` giữ `values`, `touched`, `submitted` (state), và tính `errors`, `isValid`, `visibleErrors` (dẫn xuất).
-- Context value: `{ values, errors, visibleErrors, isValid, setValue, touch }`.
+- Context value: `{ values, errors, visibleErrors, isValid, submitted, setValue, touch, markSubmitted }`.
+
+### 5.2.1 Luật và thông báo (đã chốt)
+
+Mỗi luật kiểm theo thứ tự, trả về thông báo **đầu tiên** không đạt. Giá trị được `trim` trước khi kiểm.
+
+| Field | Thứ tự kiểm | Thông báo |
+|---|---|---|
+| `name` | rỗng; ngắn hơn 2; dài hơn 60 | "Họ tên là bắt buộc"; "Họ tên cần ít nhất 2 ký tự"; "Họ tên tối đa 60 ký tự" |
+| `email` | rỗng; không khớp `/^[^\s@]+@[^\s@]+\.[^\s@]+$/` | "Email là bắt buộc"; "Email chưa đúng định dạng" |
+| `age` | rỗng; không khớp `/^\d+$/`; ngoài 1 đến 150 | "Tuổi là bắt buộc"; "Tuổi phải là số nguyên"; "Tuổi từ 1 đến 150" |
+| `iq` | rỗng; không khớp `/^\d+(\.\d+)?$/`; ngoài 50 đến 300 | "IQ là bắt buộc"; "IQ phải là số"; "IQ từ 50 đến 300" |
+
+`INITIAL_VALUES` (bốn chuỗi rỗng) và `RULES` cùng nằm ở `rules.js`: danh sách field chỉ khai báo một chỗ.
+
+### 5.2.2 Giao diện
+
+- `age` và `iq` dùng `type="text"` + `inputMode="numeric"`, **không** dùng `type="number"`: trình duyệt trả chuỗi rỗng cho đầu vào sai, nên luật "phải là số" sẽ không bao giờ thấy chữ người dùng gõ.
+- Nhãn nằm trên ô nhập, thông báo lỗi nằm dưới ô (chữ, không chỉ màu; ô lỗi có viền dày hơn).
+- Bề mặt, màu, khoảng cách theo Lab03 (cùng token và kiểu panel với Sprint 1). Nút gửi dùng kiểu nút accent của Lab03 (`reset`).
+- Route `/form` đổi từ `Placeholder` sang `SimpleForm` ở S2-04.
 
 ### 5.3 Task
 
