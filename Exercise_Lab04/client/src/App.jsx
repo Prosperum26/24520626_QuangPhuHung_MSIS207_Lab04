@@ -6,6 +6,7 @@ import { Placeholder } from './Placeholder.jsx';
 import { PEOPLE } from './sprint1-router/people.js';
 import PeopleLayout from './sprint1-router/PeopleLayout.jsx';
 import { PeopleIndex } from './sprint1-router/PeopleIndex.jsx';
+import SimpleForm from './sprint2-form/SimpleForm.jsx';
 
 // Code splitting theo route: PersonDetail thành chunk riêng, chỉ tải khi vào /people/:id.
 // Suspense nằm ở PeopleLayout, quanh <Outlet/>.
@@ -21,7 +22,7 @@ export function App() {
           <Route index element={<PeopleIndex />} />
           <Route path=":id" element={<PersonDetail people={PEOPLE} />} />
         </Route>
-        <Route path="form" element={<Placeholder title="Form" sprint="Sprint 2" />} />
+        <Route path="form" element={<SimpleForm />} />
         <Route path="forum" element={<Placeholder title="Forum" sprint="Sprint 3" />} />
         <Route path="*" element={<NotFound />} />
       </Route>

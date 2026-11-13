@@ -23,9 +23,9 @@ describe('App routes', () => {
     expect(screen.getByRole('link', { name: 'Albert Einstein' })).toBeInTheDocument();
   });
 
-  it('/form và /forum có chỗ trống đến Sprint 2 và 3', () => {
+  it('/form hiện form "Thêm người"; /forum còn chỗ trống đến Sprint 3', () => {
     const { unmount } = renderAt('/form');
-    expect(screen.getByRole('heading', { level: 2, name: /form/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: /thêm người/i })).toBeInTheDocument();
     unmount();
     renderAt('/forum');
     expect(screen.getByRole('heading', { level: 2, name: /forum/i })).toBeInTheDocument();
