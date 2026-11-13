@@ -2,7 +2,7 @@
 
 > Nạp file này cho mọi AI assistant dùng trong repo. Nếu yêu cầu mâu thuẫn với file này, dừng lại và chỉ ra mâu thuẫn thay vì âm thầm phá luật.
 > Nguồn: **[Thầy]** = từ slide Lab 4, **[Lab 2/3]** = kế thừa, **[Cá nhân]** = mình đặt thêm.
-> Bối cảnh: [Context.md](Context.md). Luật riêng cho AI: [../Agents.md](../Agents.md). WBS bài: [../Exercise_Lab04/TASK_DECOMPOSITION.md](../Exercise_Lab04/TASK_DECOMPOSITION.md).
+> Bối cảnh: [Context.md](docs/Context.md). Luật riêng cho AI: [Agents.md](Agents.md). WBS bài: [Exercise_Lab04/TASK_DECOMPOSITION.md](Exercise_Lab04/TASK_DECOMPOSITION.md).
 
 ## 1. Triết lý và hợp đồng kiểm chứng [Thầy]
 
@@ -83,7 +83,7 @@ Hợp đồng kiểm chứng full-stack (slide 3):
 - CORS giới hạn origin của client (`CLIENT_ORIGIN`), không dùng `*`.
 - `createApp()` export riêng khỏi `listen()` để test bằng supertest.
 - Bí mật chỉ đọc từ `process.env`. `.env` không commit; `.env.example` ở repo có danh sách biến, không có giá trị thật.
-- Hợp đồng API nằm ở [../shared/api-contract.md](../shared/api-contract.md), viết trước khi code.
+- Hợp đồng API nằm ở [shared/api-contract.md](shared/api-contract.md), viết trước khi code.
 
 ### 5.5 HTML và CSS [Thầy + Lab 3]
 

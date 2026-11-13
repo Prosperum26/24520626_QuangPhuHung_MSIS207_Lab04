@@ -1,6 +1,6 @@
 # Agents.md — Hướng dẫn cho AI agent (Lab 04)
 
-Đọc [docs/Context.md](docs/Context.md) và [docs/project-rules.md](docs/project-rules.md) trước. File này là **luật làm việc**: AI sinh code, con người kiểm chứng. Không chấp nhận output chưa kiểm chứng.
+Đọc [docs/Context.md](docs/Context.md) và [project-rules.md](project-rules.md) trước. File này là **luật làm việc**: AI sinh code, con người kiểm chứng. Không chấp nhận output chưa kiểm chứng.
 
 ## 1. Nguyên tắc
 
@@ -23,7 +23,7 @@ Nếu yêu cầu mơ hồ hoặc phải đoán, **hỏi một câu ngắn** thay
 
 ## 3. Quy tắc code
 
-Danh sách cấm và danh sách bắt buộc đầy đủ ở [project-rules.md §4 và §5](docs/project-rules.md). Tóm tắt những điều AI hay phạm:
+Danh sách cấm và danh sách bắt buộc đầy đủ ở [project-rules.md §4 và §5](project-rules.md). Tóm tắt những điều AI hay phạm:
 
 - Cú pháp React Router v5 (`<Switch>`, `<Redirect>`, `exact`, `component=`) và import từ `react-router-dom`.
 - `useEffect` để tính validation hoặc state dẫn xuất; effect thiếu dependency hoặc thiếu cleanup.
@@ -35,7 +35,7 @@ Danh sách cấm và danh sách bắt buộc đầy đủ ở [project-rules.md 
 
 ### Khả năng truy cập (WCAG 2.2 AA)
 
-Chi tiết ở [project-rules.md §6](docs/project-rules.md). Không tự khẳng định "đạt WCAG" khi chưa kiểm; ghi rõ tiêu chí nào, kiểm bằng cách nào. Tài liệu Markdown cũng theo WCAG: heading phân cấp, link có mô tả, code block có ngôn ngữ, ảnh có alt, không dùng emoji mang nghĩa.
+Chi tiết ở [project-rules.md §6](project-rules.md). Không tự khẳng định "đạt WCAG" khi chưa kiểm; ghi rõ tiêu chí nào, kiểm bằng cách nào. Tài liệu Markdown cũng theo WCAG: heading phân cấp, link có mô tả, code block có ngôn ngữ, ảnh có alt, không dùng emoji mang nghĩa.
 
 ### Sẵn sàng cho bảo vệ trực tiếp
 
@@ -59,10 +59,10 @@ Giảng viên đổi một yêu cầu trên code đang chạy trong 3 phút. B�
 |---|---|
 | [docs/Context.md](docs/Context.md) | Nội dung slide gốc |
 | [Agents.md](Agents.md) | Luật cho AI (file này) |
-| [docs/project-rules.md](docs/project-rules.md) | Quy tắc dự án để nạp cho AI |
+| [project-rules.md](project-rules.md) | Quy tắc dự án để nạp cho AI |
 | [shared/api-contract.md](shared/api-contract.md) | Hợp đồng API, viết trước code server |
 | `*/TASK_DECOMPOSITION.md` | WBS từng bài, tick `[x]` khi đã verify |
-| [docs/AI_FAILURE_AUDIT.md](docs/AI_FAILURE_AUDIT.md) | Báo cáo lỗi AI có bằng chứng (15% điểm) |
+| [AI_FAILURE_AUDIT.md](AI_FAILURE_AUDIT.md) | Báo cáo lỗi AI có bằng chứng (15% điểm) |
 | `docs/prompt_logs/` | Export session AI cho mỗi lần code mỗi bài |
 | `*/evidence/` | Ảnh DevTools, log kiểm chứng |
 

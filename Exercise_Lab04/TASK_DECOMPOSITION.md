@@ -75,7 +75,7 @@ Mỗi project chạy `npm` ngay trong folder của nó (như Lab03). Gốc repo 
 | ID | Task | Gate | Trạng thái |
 |---|---|---|---|
 | S0-01 | Chốt D1 đến D15 với mình | Bạn trả lời "ok" | [x] |
-| S0-02 | Viết [docs/project-rules.md](../docs/project-rules.md) và [Agents.md](../Agents.md) (chuyển từ Lab03, chỉnh cho Lab04) | Hai file có nội dung, không còn dòng "chưa viết" | [x] |
+| S0-02 | Viết [project-rules.md](../project-rules.md) và [Agents.md](../Agents.md) (chuyển từ Lab03, chỉnh cho Lab04) | Hai file có nội dung, không còn dòng "chưa viết" | [x] |
 | S0-03 | Viết [shared/api-contract.md](../shared/api-contract.md) theo mục 6.2 | Có đủ route, mã trạng thái, giới hạn field | [x] |
 | S0-04 | `git init` và các commit tài liệu | `git log` đọc được từng bước | [x] |
 | S0-05 | Dựng `client/`: sao chép cấu hình Lab03 Ex2, đổi `name`, thêm `react-router` **ghim v7** (bản mới nhất là v8, `npm install react-router` không ghim sẽ kéo nhầm), `npm install` | `npm test`, `npm run lint`, `npm run build` đều sạch | [x] |
@@ -90,7 +90,7 @@ Các commit của Sprint 0 (đã tách nhỏ):
 | 1 | `chore: scaffold lab04 repo structure` | `.gitignore`, `package.json`, `README.md`, `.env.example`, folder rỗng, WBS Homework |
 | 2 | `docs: add lab04 slide context` | `docs/Context.md` |
 | 3 | `docs: add exercise task decomposition` | WBS này |
-| 4 | `docs: add agent rules and project rules` | `Agents.md`, `docs/project-rules.md` |
+| 4 | `docs: add agent rules and project rules` | `Agents.md`, `project-rules.md` |
 | 5 | `docs: define forum api contract` | `shared/api-contract.md` |
 | 6 | `chore(client): init react19 vite client with react-router v7` | `client/` |
 | 7 | `chore(server): init express server project` | `server/`, `Exercise_Lab04/.env.example` |
@@ -268,7 +268,7 @@ Mỗi thử thách phải sửa được trong 3 phút. Thiết kế ở trên c
 |---|---|---|---|
 | S4-01 | Tự giải thích được kiến trúc ba sprint và vì sao state nằm ở từng chỗ, không nhìn code | Nói trôi chảy trong 3 phút | [ ] |
 | S4-02 | Tập sửa từng thử thách ở 7.1 trên nhánh nháp | Mỗi thử thách xong trong 3 phút, test vẫn xanh | [ ] |
-| S4-03 | `docs/AI_FAILURE_AUDIT.md`: bạn điền, AI chỉ chỉnh câu chữ | Có bằng chứng DevTools cho từng mục | [ ] |
+| S4-03 | `AI_FAILURE_AUDIT.md` (ở gốc repo): bạn điền, AI chỉ chỉnh câu chữ | Có bằng chứng DevTools cho từng mục | [ ] |
 | S4-04 | Xuất prompt log vào `docs/prompt_logs/` cho từng sprint | Có một file mỗi sprint | [ ] |
 | S4-05 | `.env.example` đủ, repo sạch chạy được từ đầu (một lệnh cài, một lệnh chạy cho mỗi project) | Clone mới chạy được | [ ] |
 
