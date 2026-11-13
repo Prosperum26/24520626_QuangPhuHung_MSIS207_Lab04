@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Routes, Route } from 'react-router';
 import { describe, it, expect } from 'vitest';
@@ -59,6 +59,29 @@ describe('PeopleLayout với route con tải lười', () => {
       </MemoryRouter>,
     );
   }
+
+  it('luôn có vùng role="status" từ đầu, kể cả khi chưa chọn ai', () => {
+    renderAt('/people');
+    expect(screen.getByRole('status')).toBeInTheDocument();
+  });
+
+  it('skeleton nằm trong vùng status và có aria-busy khi route con chưa tải xong', () => {
+    const Pending = lazy(() => new Promise(() => {}));
+    renderLazy(Pending);
+    const status = screen.getByRole('status');
+    const label = within(status).getByText(/đang tải chi tiết/i);
+    expect(label.closest('[aria-busy="true"]')).not.toBeNull();
+  });
+
+  it('vùng status là cùng một phần tử trước và sau khi tải xong (live region có sẵn)', async () => {
+    let resolve;
+    const Deferred = lazy(() => new Promise((r) => (resolve = r)));
+    renderLazy(Deferred);
+    const before = screen.getByRole('status');
+    await act(async () => resolve({ default: () => <p>da tai</p> }));
+    expect(screen.getByRole('status')).toBe(before);
+    expect(within(before).getByText('da tai')).toBeInTheDocument();
+  });
 
   it('hiện fallback khi route con chưa tải xong, danh sách vẫn dùng được', () => {
     const Pending = lazy(() => new Promise(() => {}));

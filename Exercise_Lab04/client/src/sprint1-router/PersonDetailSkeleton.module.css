@@ -1,0 +1,67 @@
+/* Kích thước khớp PersonDetail.module.css: h2 = font-size × 1.2, mỗi hàng dl = 1 dòng (line-height 1.5). */
+.skeleton {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.title {
+  display: block;
+  width: 60%;
+  height: calc(clamp(1.25rem, 3vw, 1.5rem) * 1.2);
+}
+
+.rows {
+  display: grid;
+  gap: var(--space-2);
+}
+
+/* Mỗi hàng giả có hai cột giống một cặp dt/dd. */
+.row {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+.term,
+.definition {
+  display: block;
+  height: 1.5rem;
+}
+
+.definition {
+  width: 70%;
+}
+
+.title,
+.term,
+.definition {
+  background: var(--color-border-soft);
+  border-radius: var(--radius-control);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title,
+  .term,
+  .definition {
+    animation: none;
+  }
+}

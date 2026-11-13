@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router';
+import PersonDetailSkeleton from './PersonDetailSkeleton.jsx';
 import styles from './PeopleLayout.module.css';
 
 const linkClass = ({ isActive }) => (isActive ? styles.active : styles.link);
@@ -24,9 +25,12 @@ export default function PeopleLayout({ people }) {
         </ul>
       </nav>
       <section aria-label="Chi tiết" className={styles.content}>
-        <Suspense fallback={<p>Đang tải chi tiết…</p>}>
-          <Outlet />
-        </Suspense>
+        {/* Vùng status có sẵn từ đầu (live region phải tồn tại trước khi nội dung đổi). */}
+        <div role="status">
+          <Suspense fallback={<PersonDetailSkeleton />}>
+            <Outlet />
+          </Suspense>
+        </div>
       </section>
     </div>
   );
