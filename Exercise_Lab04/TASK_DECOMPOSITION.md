@@ -197,9 +197,9 @@ Mỗi luật kiểm theo thứ tự, trả về thông báo **đầu tiên** kh�
 | S2-06 | `InputField`: `useId`, `<label htmlFor>`, `aria-invalid`, `aria-describedby`, `<p id>` lỗi (D6, D8, D9) | `InputField.jsx` | Test: gõ sai rồi blur thì thấy lỗi và `aria-describedby` trỏ đúng `id`; mở trang chưa có lỗi | [x] |
 | S2-07 | Mỗi `InputField` có `id` khác nhau | `InputField.test.jsx` | Test: bốn field cho bốn `id` phân biệt | [x] |
 | S2-08 | **Commit C6**: `feat: input field validation` (S2-06 tách commit riêng `feat(sprint2): add accessible InputField bound to form context`) | — | Test tự động đã xác nhận một phím = một commit render (`Profiler` trong `SimpleForm.test.jsx`); **còn chờ ảnh React DevTools Profiler của bạn** vào `evidence/` | [ ] |
-| S2-09 | `onSubmit`: `preventDefault`; còn lỗi thì `submitted=true` và `role="alert"` tóm tắt; hợp lệ thì lưu `submittedData` | `SimpleForm.jsx` | Test: gửi form trống ra tóm tắt lỗi; không có dữ liệu hiển thị | [ ] |
-| S2-10 | `ShowData`: `<dl>` từ `Object.entries`, chuyển `age` và `iq` sang số | `ShowData.jsx` | Test: gửi form hợp lệ hiện đủ bốn cặp `dt/dd` | [ ] |
-| S2-11 | **Commit C7**: `feat: inspector output` | — | `npm test`, `npm run lint` sạch; bàn phím điều khiển được toàn bộ form | [ ] |
+| S2-09 | `onSubmit`: `preventDefault`; còn lỗi thì `submitted=true` và `role="alert"` tóm tắt; hợp lệ thì lưu `submittedData` | `SimpleForm.jsx` | Test: gửi form trống ra tóm tắt lỗi; không có dữ liệu hiển thị | [x] |
+| S2-10 | `ShowData`: `<dl>` từ `Object.entries`; đổi `age` và `iq` sang số làm ở `toPerson` (`rules.js`) lúc gửi | `ShowData.jsx` | Test: gửi form hợp lệ hiện đủ bốn cặp `dt/dd` | [x] |
+| S2-11 | **Commit C7**: `feat: inspector output` (S2-09, S2-11); `ShowData` và `toPerson` tách commit riêng `feat(sprint2): add ShowData inspector and toPerson` (S2-10) | — | `npm test`, `npm run lint` sạch; test tự động đã phủ Tab, Enter và focus về ô lỗi đầu tiên, **còn chờ bạn thử tay bằng bàn phím** | [x] |
 
 ## 6. Sprint 3: Full-stack hook và Express API (120-155 phút)
 
