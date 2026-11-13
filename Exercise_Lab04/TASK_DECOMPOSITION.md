@@ -266,11 +266,11 @@ Mỗi thử thách phải sửa được trong 3 phút. Thiết kế ở trên c
 
 | ID | Task | Gate | Trạng thái |
 |---|---|---|---|
-| S4-01 | Tự giải thích được kiến trúc ba sprint và vì sao state nằm ở từng chỗ, không nhìn code | Nói trôi chảy trong 3 phút | [ ] |
-| S4-02 | Tập sửa từng thử thách ở 7.1 trên nhánh nháp | Mỗi thử thách xong trong 3 phút, test vẫn xanh | [ ] |
-| S4-03 | `AI_FAILURE_AUDIT.md` (ở gốc repo): bạn điền, AI chỉ chỉnh câu chữ | Có bằng chứng DevTools cho từng mục | [ ] |
-| S4-04 | Xuất prompt log vào `docs/prompt_logs/` cho từng sprint | Có một file mỗi sprint | [ ] |
-| S4-05 | `.env.example` đủ, repo sạch chạy được từ đầu (một lệnh cài, một lệnh chạy cho mỗi project) | Clone mới chạy được | [ ] |
+| S4-01 | Tự giải thích được kiến trúc ba sprint và vì sao state nằm ở từng chỗ, không nhìn code | Nói trôi chảy trong 3 phút. Dàn ý: [docs/defense-notes.md](../docs/defense-notes.md) mục 1 (việc của bạn) | [ ] |
+| S4-02 | Tập sửa từng thử thách ở 7.1 trên nhánh nháp | Mỗi thử thách xong trong 3 phút, test vẫn xanh. Công thức: [docs/defense-notes.md](../docs/defense-notes.md) mục 2 (việc của bạn, tập trên nhánh nháp) | [ ] |
+| S4-03 | `AI_FAILURE_AUDIT.md` (ở gốc repo): bạn điền, AI chỉ chỉnh câu chữ | Có bằng chứng DevTools cho từng mục. Đã có mẫu và danh sách ứng viên; **bạn tự điền** | [ ] |
+| S4-04 | Xuất prompt log vào `docs/prompt_logs/` cho từng sprint | Có một file mỗi sprint. **Bạn tự xuất** từ công cụ AI (mình không xuất được) | [ ] |
+| S4-05 | `.env.example` đủ, repo sạch chạy được từ đầu (một lệnh cài, một lệnh chạy cho mỗi project) | Đã kiểm trên bản clone sạch: `npm ci` rồi client `npm test` 110/110, `npm run lint`, `npm run build`; server `npm test` 39/39 | [x] |
 
 ## 8. Lỗi trong slide cần tránh (ứng viên cho audit)
 
