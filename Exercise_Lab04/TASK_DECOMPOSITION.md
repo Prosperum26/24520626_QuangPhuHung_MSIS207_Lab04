@@ -241,11 +241,11 @@ useForumMessages(channel) -> { messages, status, error, postMessage }
 | S3-03 | `POST` với kiểm tra payload (mục 6.2), middleware lỗi JSON, `RESPONSE_DELAY_MS` | `app.js` | Test: bảng 400 (thiếu, rỗng, quá dài, sai kiểu, JSON hỏng); 201 có `id` và `timestamp` do server | [x] |
 | S3-04 | `server.js`: đọc `PORT`, `listen` | `server/src/server.js` | `curl localhost:3001/api/channels/nasa/messages` trả JSON | [x] |
 | S3-05 | **Commit C8**: `feat(server): add express messages api with validation` (S3-03); GET tách commit `feat(server): add get messages route with cors` (S3-02), entrypoint `feat(server): add server entrypoint with env config` (S3-04) | — | `npm test` ở `server/` xanh | [x] |
-| S3-06 | `useForumMessages` theo mục 6.3 | `useForumMessages.js` (+ test) | Test với `fetch` giả: đổi kênh nhanh thì kết quả cũ không ghi đè; `res.ok` false thì `status='error'` | [ ] |
-| S3-07 | **Commit C9**: `feat: useForumMessages with abort and derived status` | — | `grep -c "setState" ` ngoài nhánh `!aborted` không còn | [ ] |
-| S3-08 | `ChannelSwitcher`, `MessageList` (`<dl>`, `<Fragment key={msg.id}>`), vùng `role="status"` cho tải | `ForumPage.jsx` và component con | Test: bấm kênh thì danh sách đổi; lỗi hiện `role="alert"` với nút Thử lại | [ ] |
-| S3-09 | `PostForm`: hai ô có nhãn, kiểm tra giới hạn ở client, gọi `postMessage` | `PostForm.jsx` | Test: gửi hợp lệ thì tin mới xuất hiện; vượt giới hạn thì không gọi server | [ ] |
-| S3-10 | **Commit C10**: `feat: forum page with channel switcher` | — | `npm run lint` sạch | [ ] |
+| S3-06 | `useForumMessages` theo mục 6.3 | `useForumMessages.js` (+ test) | Test với `fetch` giả: đổi kênh nhanh thì kết quả cũ không ghi đè; `res.ok` false thì `status='error'` | [x] |
+| S3-07 | **Commit C9**: `feat: useForumMessages with abort and derived status` | — | Mọi `setResult` trong effect đứng sau `if (!signal.aborted)`; `retry` và `postMessage` chỉ chạy trong event handler; lint sạch | [x] |
+| S3-08 | `ChannelSwitcher`, `MessageList` (`<dl>`, `<Fragment key={msg.id}>`), vùng `role="status"` cho tải | `ForumPage.jsx` và component con | Test: bấm kênh thì danh sách đổi; lỗi hiện `role="alert"` với nút Thử lại | [x] |
+| S3-09 | `PostForm`: hai ô có nhãn, kiểm tra giới hạn ở client, gọi `postMessage` | `PostForm.jsx` | Test: gửi hợp lệ thì tin mới xuất hiện; vượt giới hạn thì không gọi server | [x] |
+| S3-10 | **Commit C10**: `feat: forum page with channel switcher` (S3-08); `PostForm` tách commit `feat(sprint3): add post form with client validation` (S3-09) | — | `npm run lint` sạch | [x] |
 | S3-11 | Kiểm Slow 3G: bật `RESPONSE_DELAY_MS=2000`, đổi kênh nhanh | DevTools Network | Ảnh có request cũ ghi `(canceled)` vào `evidence/` | [ ] |
 | S3-12 | Kiểm lỗi: tắt server, mở `/forum` | DevTools Console | Giao diện hiện lỗi; lưu log vào `evidence/error-log.txt` | [ ] |
 
