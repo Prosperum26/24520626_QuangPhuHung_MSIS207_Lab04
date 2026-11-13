@@ -31,6 +31,18 @@ describe('App routes', () => {
     expect(screen.getByRole('heading', { level: 2, name: /forum/i })).toBeInTheDocument();
   });
 
+  it('/people/sp-2 hiện chi tiết trong khung, danh sách vẫn còn', () => {
+    renderAt('/people/sp-2');
+    expect(screen.getByRole('heading', { level: 2, name: 'Albert Einstein' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Albert Einstein' })).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('/people/sp-999 hiện 404 trong vùng nội dung, danh sách vẫn còn', () => {
+    renderAt('/people/sp-999');
+    expect(screen.getByRole('alert')).toHaveTextContent(/404/);
+    expect(screen.getByRole('link', { name: 'Albert Einstein' })).toBeInTheDocument();
+  });
+
   it('đường dẫn lạ hiện NotFound toàn trang', () => {
     renderAt('/xyz');
     expect(screen.getByRole('alert')).toHaveTextContent(/404/);

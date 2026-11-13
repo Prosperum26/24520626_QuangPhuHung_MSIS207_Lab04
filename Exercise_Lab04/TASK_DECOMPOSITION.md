@@ -129,13 +129,13 @@ Hành vi chốt:
 
 | ID | Task | File | Gate | Trạng thái |
 |---|---|---|---|---|
-| S1-01 | Sao chép `people.json`; bọc `PEOPLE` đóng băng | `sprint1-router/people.js` (+ test) | Test: `id` duy nhất, chuỗi, frozen | [ ] |
-| S1-02 | `App.jsx` với `<Routes>`, `AppLayout`, chuyển hướng `/`, route `*` | `App.jsx`, `AppLayout.jsx`, `NotFound.jsx` | Test với `MemoryRouter`: `/` về `/people`; `/xyz` hiện NotFound | [ ] |
-| S1-03 | `PeopleLayout`: `NavLink` cho từng người, `<Outlet/>` | `PeopleLayout.jsx` | Test: bấm tên thì URL đổi; link hiện tại có `aria-current` | [ ] |
-| S1-04 | CSS Grid master-detail, một cột dưới 640px | `PeopleLayout.module.css` | Ảnh 320px và 1440px trong `evidence/`; không cuộn ngang | [ ] |
-| S1-05 | **Commit C2**: `feat: router layout` | — | `git diff` chỉ gồm S1-02 đến S1-04 | [ ] |
-| S1-06 | `PersonDetail`: `useParams`, `people.find`, `<dl>` | `PersonDetail.jsx` | Test: `/people/sp-2` hiện Albert Einstein | [ ] |
-| S1-07 | Xử lý 404: `<NotFound/>` với `role="alert"` trong vùng nội dung | `PersonDetail.jsx` | Test: `/people/sp-999` và `/people/%20` đều ra 404, không throw | [ ] |
+| S1-01 | Sao chép `people.json`; bọc `PEOPLE` đóng băng | `sprint1-router/people.js` (+ test) | Test: `id` duy nhất, chuỗi, frozen | [x] |
+| S1-02 | `App.jsx` với `<Routes>`, `AppLayout`, chuyển hướng `/`, route `*` | `App.jsx`, `AppLayout.jsx`, `NotFound.jsx` | Test với `MemoryRouter`: `/` về `/people`; `/xyz` hiện NotFound | [x] |
+| S1-03 | `PeopleLayout`: `NavLink` cho từng người, `<Outlet/>` | `PeopleLayout.jsx` | Test: bấm tên thì URL đổi; link hiện tại có `aria-current` | [x] |
+| S1-04 | CSS Grid master-detail, một cột dưới 640px | `PeopleLayout.module.css` | Ảnh 320px và 1440px trong `evidence/`; không cuộn ngang | [x] |
+| S1-05 | **Commit C2**: `feat: router layout` (S1-02, S1-03); CSS tách thành `style(sprint1): add responsive master-detail grid in lab03 style` (S1-04) | — | Mỗi commit chỉ gồm file của task đó | [x] |
+| S1-06 | `PersonDetail`: `useParams`, `people.find`, `<dl>` | `PersonDetail.jsx` | Test: `/people/sp-2` hiện Albert Einstein | [x] |
+| S1-07 | Xử lý 404: `<NotFound/>` với `role="alert"` trong vùng nội dung | `PersonDetail.jsx` | Test: `/people/sp-999` và `/people/%20` đều ra 404, không throw | [x] |
 | S1-08 | **Commit C3**: `feat: detail route handling` | — | Console DevTools 0 warning khi đi hết các route; ảnh vào `evidence/` | [ ] |
 | S1-09 | `lazy(() => import('./PersonDetail'))` + `Suspense` quanh `<Outlet/>` | `PeopleLayout.jsx` | Build thấy chunk riêng của `PersonDetail` | [ ] |
 | S1-10 | Skeleton đúng kích thước, bọc vùng `role="status"` cố định (D10) | `PersonDetailSkeleton.jsx` | Lighthouse CLS = 0 khi vào `/people/sp-2` với Slow 3G | [ ] |
