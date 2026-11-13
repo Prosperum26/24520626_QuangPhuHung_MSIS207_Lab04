@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router';
 import styles from './PeopleLayout.module.css';
 
@@ -23,7 +24,9 @@ export default function PeopleLayout({ people }) {
         </ul>
       </nav>
       <section aria-label="Chi tiết" className={styles.content}>
-        <Outlet />
+        <Suspense fallback={<p>Đang tải chi tiết…</p>}>
+          <Outlet />
+        </Suspense>
       </section>
     </div>
   );

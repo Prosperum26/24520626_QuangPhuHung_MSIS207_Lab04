@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { lazy } from 'react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Routes, Route } from 'react-router';
 import { describe, it, expect } from 'vitest';
@@ -43,5 +44,36 @@ describe('PeopleLayout', () => {
     expect(screen.getByText('chi tiet')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Alan' })).toHaveAttribute('aria-current', 'page');
     expect(screen.getByRole('link', { name: 'Ada' })).not.toHaveAttribute('aria-current');
+  });
+});
+
+describe('PeopleLayout với route con tải lười', () => {
+  function renderLazy(LazyDetail) {
+    return render(
+      <MemoryRouter initialEntries={['/people/a-1']}>
+        <Routes>
+          <Route path="people" element={<PeopleLayout people={people} />}>
+            <Route path=":id" element={<LazyDetail />} />
+          </Route>
+        </Routes>
+      </MemoryRouter>,
+    );
+  }
+
+  it('hiện fallback khi route con chưa tải xong, danh sách vẫn dùng được', () => {
+    const Pending = lazy(() => new Promise(() => {}));
+    renderLazy(Pending);
+    expect(screen.getByText(/đang tải chi tiết/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Ada' })).toBeInTheDocument();
+  });
+
+  it('thay fallback bằng nội dung khi tải xong', async () => {
+    let resolve;
+    const Deferred = lazy(() => new Promise((r) => (resolve = r)));
+    renderLazy(Deferred);
+    expect(screen.getByText(/đang tải chi tiết/i)).toBeInTheDocument();
+    await act(async () => resolve({ default: () => <p>da tai</p> }));
+    expect(screen.getByText('da tai')).toBeInTheDocument();
+    expect(screen.queryByText(/đang tải chi tiết/i)).not.toBeInTheDocument();
   });
 });
