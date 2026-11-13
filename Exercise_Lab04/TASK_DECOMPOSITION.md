@@ -137,9 +137,9 @@ Hành vi chốt:
 | S1-06 | `PersonDetail`: `useParams`, `people.find`, `<dl>` | `PersonDetail.jsx` | Test: `/people/sp-2` hiện Albert Einstein | [x] |
 | S1-07 | Xử lý 404: `<NotFound/>` với `role="alert"` trong vùng nội dung | `PersonDetail.jsx` | Test: `/people/sp-999` và `/people/%20` đều ra 404, không throw | [x] |
 | S1-08 | **Commit C3**: `feat: detail route handling` | — | Console DevTools 0 warning khi đi hết các route; ảnh vào `evidence/` | [ ] |
-| S1-09 | `lazy(() => import('./PersonDetail'))` + `Suspense` quanh `<Outlet/>` | `PeopleLayout.jsx` | Build thấy chunk riêng của `PersonDetail` | [ ] |
-| S1-10 | Skeleton đúng kích thước, bọc vùng `role="status"` cố định (D10) | `PersonDetailSkeleton.jsx` | Lighthouse CLS = 0 khi vào `/people/sp-2` với Slow 3G | [ ] |
-| S1-11 | **Commit C4**: `perf: lazy load PersonDetail with skeleton` | — | Test cũ vẫn xanh (dùng `findBy`) | [ ] |
+| S1-09 | `lazy(() => import('./PersonDetail'))` + `Suspense` quanh `<Outlet/>` | `PeopleLayout.jsx` | Build thấy chunk riêng của `PersonDetail` | [x] |
+| S1-10 | Skeleton đúng kích thước, bọc vùng `role="status"` cố định (D10) | `PersonDetailSkeleton.jsx` | Lighthouse CLS = 0 khi vào `/people/sp-2` với Slow 3G. Code và test đã xong (23 test xanh); **chờ bạn đo Lighthouse** | [ ] |
+| S1-11 | Commit tách hai bước: `perf: lazy load PersonDetail route` (S1-09) và `feat(sprint1): add dimension-matched skeleton with status region` (S1-10) | — | Test cũ vẫn xanh (dùng `findBy`) | [x] |
 
 Cổng cuối Sprint 1: `npm test`, `npm run lint`, `npm run build` đều sạch.
 
