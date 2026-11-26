@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 /**
- * Nối MongoDB. Mongoose 8: không truyền useNewUrlParser/useUnifiedTopology (đã bỏ).
+ * Nối MongoDB. Mongoose 8 đã bỏ các cờ kết nối cũ của bản 5, nên chỉ truyền uri.
  * @param {string | undefined} uri lấy từ process.env, không bao giờ viết cứng trong mã
  */
 export async function connectDb(uri) {
