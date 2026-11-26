@@ -25,7 +25,8 @@ export function SwipeControls({ onSwipe, onUndo, canSwipe, canUndo }) {
           disabled={!canSwipe}
           onClick={() => onSwipe(direction)}
         >
-          <span aria-hidden="true">{icon}</span> {DIRECTION_LABEL[direction]}
+          <span aria-hidden="true">{icon} </span>
+          {DIRECTION_LABEL[direction]}
         </button>
       ))}
       <button
@@ -35,7 +36,8 @@ export function SwipeControls({ onSwipe, onUndo, canSwipe, canUndo }) {
         disabled={!canUndo}
         onClick={onUndo}
       >
-        <span aria-hidden="true">⌫</span> Hoàn tác
+        <span aria-hidden="true">⌫ </span>
+        Hoàn tác
       </button>
     </div>
   );
