@@ -9,7 +9,7 @@
 3. **Test trước khi code**: viết test đỏ, rồi code tối thiểu cho xanh, rồi dọn.
 4. **Verify-before-claim**: chỉ nói "xong" khi đã chạy test/lệnh kiểm chứng và thấy output thật.
 5. **Giải thích được**: người dùng sẽ bị sửa mã ngay tại chỗ khi **tắt hết AI**. Mã đơn giản, mỗi quyết định ở một chỗ, kèm lý do ngắn. Không thêm thư viện hay abstraction mà người dùng không giải thích được.
-6. **Đúng scope**: bài này không làm TanStack Query, Next.js, RSC, Mongoose (Mongoose thuộc Homework 2).
+6. **Đúng scope**: bài này không làm TanStack Query, Next.js, RSC, Mongoose (Mongoose thuộc Homework 1).
 
 ## 2. Quy trình mỗi task
 

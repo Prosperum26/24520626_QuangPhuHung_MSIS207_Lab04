@@ -18,7 +18,7 @@ Hợp đồng kiểm chứng full-stack (slide 3):
 ## 2. Stack [Thầy + Lab 3]
 
 - **Client:** React 19, Vite, `react-router` v7 (import từ `'react-router'`), JavaScript `.jsx` với contract bằng JSDoc, CSS Modules + CSS custom properties.
-- **Server:** Node, Express, `cors`; dữ liệu trong bộ nhớ ở Exercise. Mongoose 8 chỉ dùng ở Homework 2.
+- **Server:** Node, Express, `cors`; dữ liệu trong bộ nhớ ở Exercise. Mongoose 8 chỉ dùng ở Homework 1 (Swipe Deck).
 - **Test:** Vitest + jsdom + React Testing Library (client); Vitest + supertest (server).
 - **Mỗi project là độc lập** (`package.json`, `node_modules/` riêng): `Exercise_Lab04/client`, `Exercise_Lab04/server`, và từng Homework. Chạy `npm` ngay trong folder của project.
 - Không dùng TanStack Query, Next.js, RSC: thuộc lab sau (Tier 3). Không state manager ngoài (Redux, Zustand).
