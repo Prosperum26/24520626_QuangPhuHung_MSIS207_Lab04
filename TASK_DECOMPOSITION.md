@@ -9,7 +9,7 @@
 |---|---|---|---|---|
 | Exercise | Multi-route SPA, Context Form Engine, Forum full-stack (3 sprint) | `Exercise_Lab04/` | [WBS Exercise](Exercise_Lab04/TASK_DECOMPOSITION.md) | Code xong; còn bằng chứng DevTools và tài liệu bảo vệ |
 | Homework 1 | Card-Swipe Deck "Hẹn Hò Nhưng Không Yêu" (Express + Mongoose 8), slide 20 | `Homework1_Lab04/` | [WBS HW1](Homework1_Lab04/TASK_DECOMPOSITION.md) | Xong H1-00 đến H1-14; còn thử NVDA và cảm ứng thật |
-| Homework 2 | Esports Fair-Play Appeal Tribunal, slide 21 | `Homework2_Lab04/` | [WBS HW2](Homework2_Lab04/TASK_DECOMPOSITION.md) | Đã lên plan H2-00 đến H2-10 |
+| Homework 2 | Esports Fair-Play Appeal Tribunal, slide 21 | `Homework2_Lab04/` | [WBS HW2](Homework2_Lab04/TASK_DECOMPOSITION.md) | Xong H2-00 đến H2-09; còn H2-10 (AI_FAILURE_AUDIT, người dùng viết) |
 | Homework 3 | Photo and Evidence Gallery, slide 19 và 30 | `Homework3_Lab04/` | [WBS HW3](Homework3_Lab04/TASK_DECOMPOSITION.md) | Chưa bắt đầu |
 
 Slide đánh số Homework không nhất quán (slide 19 và 20 cùng ghi "Homework 1", code contract ghi 3 và 4). Thứ tự trên chốt theo slide 20, 21 và slide 30.

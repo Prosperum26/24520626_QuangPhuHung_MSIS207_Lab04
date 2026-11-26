@@ -1,0 +1,81 @@
+{
+  "ranAt": "2026-11-26T14:06:22.021Z",
+  "browser": "Microsoft Edge (headless)",
+  "results": [
+    {
+      "name": "home lists both dossiers",
+      "ok": true,
+      "detail": "[\"/dossier/himass\",\"/dossier/tanvuu\"]"
+    },
+    {
+      "name": "timer matches server deadline (±2s)",
+      "ok": true,
+      "detail": "shown=47:59:56 diffMs=882"
+    },
+    {
+      "name": "timer ticks down",
+      "ok": true,
+      "detail": "47:59:56 -> 47:59:54"
+    },
+    {
+      "name": "matrix verdict rendered",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "inline email error after blur",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "error clears as user types",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "submit with errors focuses first invalid field",
+      "ok": true,
+      "detail": "focused=grounds"
+    },
+    {
+      "name": "receipt after submit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "receipt persists after reload",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "server rejects a second appeal with 409",
+      "ok": true,
+      "detail": "409"
+    },
+    {
+      "name": "unknown dossier shows 404 in content area",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "uppercase id opens dossier",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "form locks when SLA expires",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "server enforces deadline with 409",
+      "ok": true,
+      "detail": "409 {\"error\":\"Appeal window closed\"}"
+    },
+    {
+      "name": "no console/page errors",
+      "ok": true,
+      "detail": "[]"
+    }
+  ]
+}

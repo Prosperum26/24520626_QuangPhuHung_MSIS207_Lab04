@@ -84,16 +84,16 @@ Homework2_Lab04/
 
 | ID | Task | Gate | Trạng thái |
 |---|---|---|---|
-| H2-00 | Contract API + env | File contract được commit trước code | [ ] |
-| H2-01 | Server khung + luật dùng chung | Test luật xanh | [ ] |
-| H2-02 | Store + dữ liệu hồ sơ | Test store xanh | [ ] |
-| H2-03 | Route API + `server.js` | Test supertest xanh, `curl` trên server thật | [ ] |
-| H2-04 | Client khung + router | Test route và 404 xanh, `lint`, `build` chạy | [ ] |
-| H2-05 | Domain: ma trận + đồng hồ | Test thuần xanh | [ ] |
-| H2-06 | API client + `useDossier` + trang hồ sơ | Test R3 xanh | [ ] |
-| H2-07 | `useAppealSlaTimer` + `SlaCountdown` | Test R1, R2 xanh | [ ] |
-| H2-08 | Form kháng cáo | Test R4, R5, R6 phía client xanh | [ ] |
-| H2-09 | CSS tối giản, README, kiểm chứng thủ công | Ảnh chụp trong `evidence/` | [ ] |
+| H2-00 | Contract API + env | File contract được commit trước code | [x] |
+| H2-01 | Server khung + luật dùng chung | Test luật xanh | [x] |
+| H2-02 | Store + dữ liệu hồ sơ | Test store xanh | [x] |
+| H2-03 | Route API + `server.js` | Test supertest xanh, `curl` trên server thật | [x] |
+| H2-04 | Client khung + router | Test route và 404 xanh, `lint`, `build` chạy | [x] |
+| H2-05 | Domain: ma trận + đồng hồ | Test thuần xanh | [x] |
+| H2-06 | API client + `useDossier` + trang hồ sơ | Test R3 xanh | [x] |
+| H2-07 | `useAppealSlaTimer` + `SlaCountdown` | Test R1, R2 xanh | [x] |
+| H2-08 | Form kháng cáo | Test R4, R5, R6 phía client xanh | [x] |
+| H2-09 | CSS tối giản, README, kiểm chứng thủ công | Ảnh chụp trong `evidence/` | [x] |
 | H2-10 | `AI_FAILURE_AUDIT.md` (người dùng viết) | Người dùng xác nhận | [ ] |
 
 ---
@@ -421,7 +421,25 @@ Slide 21 và slide 18 tính phần này 15% điểm. **AI không viết nội du
 
 ## 6. Kết quả kiểm chứng
 
-Ghi output thật vào đây khi làm xong từng gate.
+Đo ngày 2026-11-26, chạy trên máy phát triển (Node 26, Edge headless).
+
+| Hạng mục | Kết quả |
+|---|---|
+| Server `npm test` | 30/30 (luật dùng chung 8, store 7, API 15) |
+| Client `npm test` | 42/42 (domain 8, `useDossier` 5, `useAppealSlaTimer` 7, trang hồ sơ 6, form 11, App 2, còn lại 3) |
+| `npm run lint` (client) | 0 lỗi |
+| `npm run build` (client) | chạy được, có tách chunk `DossierPage` |
+| Grep cấm (§1) | 0 dòng: `react-router-dom\|keyCode\|defaultProps\|dangerouslySetInnerHTML`; `useEffect` trong `form/` và `domain/`; `s - 1\|remaining - ` trong hook timer |
+| `curl` trên server thật (H2-03) | `/api/time`, `/api/dossiers`, `/api/dossiers/tanvuu` trả 200; POST sai kiểu trả 400 kèm `fields` |
+| E2E trên Edge headless | 15/15, xem [evidence/e2e-edge.json](evidence/e2e-edge.json) và 7 ảnh `evidence/0*.png` (1280px và 375px) |
+| Review cả nhánh (subagent) | 6 phát hiện: 3 sửa (test đỏ rồi xanh), 3 Minor để lại |
+
+E2E đã kiểm: đồng hồ khớp hạn của server (lệch dưới 2 giây) và giảm theo thời gian; lỗi email hiện sau khi rời ô và mất khi gõ đúng; bấm Nộp khi còn lỗi thì focus vào ô lỗi đầu; nộp xong và F5 vẫn thấy biên nhận; nộp lần hai bị 409; `/dossier/xyz` hiện 404 trong vùng nội dung; `/dossier/TANVUU` mở được; `SLA_HOURS` nhỏ thì hết hạn, form khóa và server trả 409.
+
+**Phát hiện Minor để lại (chưa sửa):**
+- Lỗi charset hoặc encoding lạ của body-parser trả 500 thay vì 415.
+- `/api/time` trả body sai định dạng thì đồng hồ hiện `NaN:NaN:NaN`.
+- Server nhận `grounds` trùng nhau, biên nhận sẽ có key React trùng.
 
 ## Nguồn dữ kiện hồ sơ
 
