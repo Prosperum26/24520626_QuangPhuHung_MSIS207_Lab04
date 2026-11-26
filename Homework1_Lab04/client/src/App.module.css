@@ -1,0 +1,108 @@
+.page {
+  display: grid;
+  gap: var(--space-4);
+  max-inline-size: 30rem;
+  margin-inline: auto;
+  padding: var(--space-5) var(--space-4);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.25rem, 5vw, 1.75rem);
+}
+
+.newGame,
+.retry {
+  min-block-size: var(--control-height);
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-accent);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.newGame:disabled {
+  border-color: var(--color-border-soft);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.alert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: 2px solid var(--color-danger);
+  border-radius: var(--radius-control);
+  background: var(--color-danger-tint);
+  color: var(--color-text);
+}
+
+.alert p {
+  margin: 0;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-5);
+  margin: 0;
+}
+
+.stats div {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.stats dt {
+  color: var(--color-muted);
+}
+
+.stats dt::after {
+  content: ':';
+}
+
+.stats dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.stage {
+  display: grid;
+  min-block-size: 0;
+}
+
+/* Giữ chỗ đúng kích thước thẻ để lúc tải xong không nhảy bố cục (CLS = 0). */
+.skeleton {
+  inline-size: var(--card-width);
+  aspect-ratio: var(--card-ratio);
+  margin-inline: auto;
+  border-radius: var(--radius-card);
+  background: var(--color-tint);
+}
+
+.hint {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.status {
+  display: block;
+  min-block-size: 1.5em;
+  text-align: center;
+}
