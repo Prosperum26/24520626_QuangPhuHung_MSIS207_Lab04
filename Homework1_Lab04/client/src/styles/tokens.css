@@ -43,7 +43,7 @@
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   /* Swipe Deck: chữ nhãn hướng quẹt, đạt 4.5:1 trên --color-surface. */
-  --color-like: #15803d;
+  --color-like: #166534;
   --color-pass: #b42318;
   --color-super: #1d4fd8;
   --card-width: min(100%, 22rem);
