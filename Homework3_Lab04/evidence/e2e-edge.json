@@ -1,0 +1,116 @@
+{
+  "ranAt": "2026-11-26T14:47:19.660Z",
+  "browser": "Microsoft Edge (headless)",
+  "results": [
+    {
+      "name": "deep link opens dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "focus lands on Đóng inside dialog",
+      "ok": true,
+      "detail": "{\"tag\":\"BUTTON\",\"text\":\"Đóng\",\"inDialog\":true,\"href\":null}"
+    },
+    {
+      "name": "position 2/4 shown",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "body scroll locked while open",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Tab never lands on a background control (native modal focus trap)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Esc closes dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Esc keeps category, drops photoId",
+      "ok": true,
+      "detail": "?category=document"
+    },
+    {
+      "name": "body scroll unlocked after close",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "click thumbnail opens dialog with category kept",
+      "ok": true,
+      "detail": "?category=scene&photoId=p02"
+    },
+    {
+      "name": "focus returns to the clicked thumbnail (R6)",
+      "ok": true,
+      "detail": "{\"tag\":\"A\",\"text\":\"Hiện trường 2: khu vực khán giả\",\"inDialog\":false,\"href\":\"/?category=scene&photoId=p02\"}"
+    },
+    {
+      "name": "lightbox open before Back",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Back closes lightbox, keeps category",
+      "ok": true,
+      "detail": "?category=scene"
+    },
+    {
+      "name": "Ảnh sau changes photoId",
+      "ok": true,
+      "detail": "?category=scene&photoId=p02"
+    },
+    {
+      "name": "one Back after next returns to grid",
+      "ok": true,
+      "detail": "?category=scene"
+    },
+    {
+      "name": "keyboard Tab reaches first thumbnail",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Enter opens lightbox",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Esc closes, focus back on thumbnail",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "unknown photoId shows notice, no dialog",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "invalid category shows all 12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "no horizontal scroll at 320px (grid)",
+      "ok": true,
+      "detail": "overflow=0px"
+    },
+    {
+      "name": "no horizontal scroll at 320px (lightbox open)",
+      "ok": true,
+      "detail": "overflow=0px"
+    },
+    {
+      "name": "no console/page errors",
+      "ok": true,
+      "detail": "[]"
+    }
+  ]
+}
