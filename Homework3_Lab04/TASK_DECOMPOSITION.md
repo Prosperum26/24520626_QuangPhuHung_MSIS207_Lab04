@@ -90,15 +90,15 @@ Homework3_Lab04/
 
 | ID | Task | Gate | Trạng thái |
 |---|---|---|---|
-| H3-00 | Hợp đồng URL + kiểu dữ liệu | File contract được commit trước code | [ ] |
-| H3-01 | Khung client + router + khung Layout | `npm test`, `lint`, `build` chạy; test route + 404 xanh | [ ] |
-| H3-02 | Dữ liệu ảnh + script sinh SVG | Test dữ liệu xanh, 12 file SVG tồn tại | [ ] |
-| H3-03 | Hàm thuần của gallery | Test R4 phía domain xanh | [ ] |
-| H3-04 | Hook `useGalleryParams` | Test giữ tham số xanh | [ ] |
-| H3-05 | `PhotoLightbox` bằng `<dialog>` | Test R2, R5, R7 xanh | [ ] |
-| H3-06 | Trang Gallery: lưới, lọc, deep link | Test R1, R2, R3, R4 xanh | [ ] |
-| H3-07 | CSS, trang About, README | 320px không cuộn ngang | [ ] |
-| H3-08 | Kiểm chứng: axe, Lighthouse, Edge | Lighthouse 100, e2e R6 đạt, ảnh trong `evidence/` | [ ] |
+| H3-00 | Hợp đồng URL + kiểu dữ liệu | File contract được commit trước code | [x] |
+| H3-01 | Khung client + router + khung Layout | `npm test`, `lint`, `build` chạy; test route + 404 xanh | [x] |
+| H3-02 | Dữ liệu ảnh + script sinh SVG | Test dữ liệu xanh, 12 file SVG tồn tại | [x] |
+| H3-03 | Hàm thuần của gallery | Test R4 phía domain xanh | [x] |
+| H3-04 | Hook `useGalleryParams` | Test giữ tham số xanh | [x] |
+| H3-05 | `PhotoLightbox` bằng `<dialog>` | Test R2, R5, R7 xanh | [x] |
+| H3-06 | Trang Gallery: lưới, lọc, deep link | Test R1, R2, R3, R4 xanh | [x] |
+| H3-07 | CSS, trang About, README | 320px không cuộn ngang | [x] |
+| H3-08 | Kiểm chứng: axe, Lighthouse, Edge | Lighthouse 100, e2e R6 đạt, ảnh trong `evidence/` | [x] |
 
 ---
 
@@ -321,6 +321,41 @@ it('withParams áp patch, xóa khi null, giữ khóa khác, không đổi input'
 ## 7. Kết quả kiểm chứng
 
 Ghi output thật vào đây khi làm xong từng gate.
+
+Đo ngày 2026-11-26 trên máy phát triển (Node 26, Edge headless, Lighthouse 13.6.0, bản build qua `vite preview` cổng 5176).
+
+| Hạng mục | Kết quả |
+|---|---|
+| `npm test` (client) | 51/51 (domain 5, dữ liệu 5, hook 6, lightbox 12, trang Gallery 13, App 4, axe 6) |
+| `npm run lint` | 0 lỗi |
+| `npm run build` | chạy được; `AboutPage` tách chunk riêng |
+| Grep cấm (§2) | 0 dòng: `react-router-dom\|keyCode\|defaultProps\|dangerouslySetInnerHTML\|alert\(`; `useEffect` chỉ có trong `PhotoLightbox.jsx`; `GalleryPage.jsx` không có `useState` |
+| axe-core trong jsdom | 0 vi phạm ở 6 trạng thái (`/`, `/?category=scene`, deep link mở ảnh, `photoId` lạ, `/about`, 404); đã tắt rule `color-contrast` vì jsdom không tính được |
+| E2E trên Edge headless | 22/22, xem [evidence/e2e-edge.json](evidence/e2e-edge.json) và 5 ảnh `evidence/0*.png` |
+| Review cả nhánh (subagent) | 5 phát hiện: 2 sửa (test đỏ rồi xanh), 3 Minor để lại; 1 phát hiện về lời khẳng định quá mức đã sửa bằng cách thu hẹp câu chữ |
+
+**Lighthouse** (4 hạng mục chuẩn; báo cáo trong `evidence/lighthouse-hw3-*`):
+
+| Trang | Chế độ | Performance | Accessibility | Best Practices | SEO | LCP | CLS |
+|---|---|---|---|---|---|---|---|
+| `/` | Mobile | 100 | 100 | 100 | 100 | 1.7 s | 0 |
+| `/?category=document&photoId=p06` | Mobile | 100 | 100 | 100 | 100 | 1.5 s | 0 |
+| `/` | Desktop | 100 | 100 | 100 | 100 | 0.4 s | 0 |
+| `/?category=document&photoId=p06` | Desktop | 100 | 100 | 100 | 100 | 0.4 s | 0 |
+
+Lighthouse 13.6.0 có thêm hạng mục mới `agentic-browsing`, cả 4 lần đo đều ra 50. Hạng mục này không thuộc 4 hạng mục chuẩn của đề và mình không xử lý.
+
+**Đã kiểm bằng E2E trên Edge** (những thứ jsdom không làm được): deep link mở dialog và focus rơi vào nút `Đóng`; Tab không bao giờ rơi vào control nền; `Esc` đóng và giữ `category`; focus quay về đúng thumbnail đã bấm (R6); nền bị khóa cuộn khi mở và hết khóa khi đóng; Back đóng lightbox và giữ danh mục (R1); `Ảnh sau` dùng replace nên một lần Back về thẳng lưới; `photoId` lạ hiện thông báo; `category` lạ hiện đủ 12 ảnh; 320px không cuộn ngang, kể cả khi lightbox đang mở.
+
+**Phát hiện của review đã sửa:**
+- Người dùng đọc màn hình không được báo khi đổi ảnh bằng nút Ảnh trước/sau (focus ở nguyên nút). Giờ chữ vị trí nằm trong `role="status"` và kèm tiêu đề ảnh.
+- Sự kiện `close` của dialog có thể đến muộn khi Back rồi Forward nhanh, làm mất `photoId` vừa mở lại. Giờ bỏ qua sự kiện đó nếu dialog đã mở lại.
+- Trang giới thiệu khẳng định "dùng được hoàn toàn bằng bàn phím" nhiều hơn bằng chứng. Đã thu hẹp lại đúng phần đã kiểm và liệt kê phần chưa kiểm.
+
+**Phát hiện Minor để lại (chưa sửa):**
+- Bấm nền tối để đóng có thể kích hoạt nhầm khi kéo chuột từ trong dialog ra ngoài, hoặc khi bấm vào thanh cuộn của dialog.
+- Chuyển ảnh bằng nút rồi `Esc`: focus quay về ảnh đã bấm ban đầu, không phải ảnh đang xem lúc đóng. Vẫn hợp lệ theo WCAG 2.4.3.
+- Mở bằng deep link rồi đóng thì focus về `<body>` (không có thumbnail nào đã được bấm).
 
 ## 8. Còn lại cho người dùng
 

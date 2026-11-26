@@ -66,6 +66,20 @@ describe('PhotoLightbox', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
+  it('review #2: sự kiện close đến muộn khi dialog đã mở lại thì KHÔNG gọi onClose', () => {
+    const { onClose } = setup();
+    expect(dialog()).toHaveAttribute('open');
+    act(() => {
+      dialog().dispatchEvent(new Event('close'));
+    });
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('review #1: vị trí ảnh nằm trong vùng status, kèm tiêu đề, để người dùng đọc màn hình biết ảnh đã đổi', () => {
+    setup({ position: { index: 0, total: 3 } });
+    expect(screen.getByRole('status')).toHaveTextContent('Ảnh 1/3: ' + p1.title);
+  });
+
   it('R2: Esc (dialog tự close) gọi onClose một lần', () => {
     const { onClose } = setup();
     act(() => dialog().close());
@@ -102,7 +116,7 @@ describe('PhotoLightbox', () => {
     expect(prev).not.toBeDisabled();
     await userEvent.setup().click(prev);
     expect(screen.getByTestId('search')).toHaveTextContent('?photoId=p01');
-    expect(screen.getByText('Ảnh 1/3')).toBeInTheDocument();
+    expect(screen.getByRole('status')).toHaveTextContent('Ảnh 1/3');
   });
 
   it('R7: ảnh cuối thì Ảnh sau aria-disabled; Ảnh trước chuyển ảnh bằng replace', async () => {

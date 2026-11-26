@@ -23,8 +23,15 @@ export default function AboutPage() {
       </p>
 
       <h3>Truy cập</h3>
-      <p>Đã kiểm: dùng được hoàn toàn bằng bàn phím, lightbox là phần tử dialog gốc (phím Esc đóng, focus quay về ảnh đã bấm).</p>
-      <p>Chưa kiểm: trình đọc màn hình thật (NVDA, Narrator) và thiết bị cảm ứng thật.</p>
+      <p>
+        Đã kiểm trên Edge bằng bàn phím: Tab tới ảnh, Enter mở lightbox, Esc đóng, focus quay về đúng ảnh đã bấm, Tab không rơi vào nội dung nền khi
+        lightbox mở. Đã kiểm tự động: axe-core trên 6 trạng thái trang (không gồm tương phản màu) và Lighthouse Accessibility 100 trên trang chủ và một
+        liên kết ảnh.
+      </p>
+      <p>
+        Chưa kiểm: điều hướng bằng bàn phím ở bộ lọc, nút chuyển ảnh và các trang phụ; tương phản màu ở trang giới thiệu và trang 404; trình đọc màn hình thật
+        (NVDA, Narrator); thiết bị cảm ứng thật.
+      </p>
     </article>
   );
 }

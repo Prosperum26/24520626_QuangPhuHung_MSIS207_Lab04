@@ -30,9 +30,10 @@ export function PhotoLightbox({ photo, prev, next, position, hrefFor, onClose })
   }, [open]);
 
   // Sự kiện close tới cả khi Esc/nút Đóng (người dùng) lẫn khi ta tự close() lúc photo thành null.
-  // Chỉ trường hợp đầu cần báo lên URL.
+  // Chỉ trường hợp đầu cần báo lên URL. Sự kiện close đến muộn khi dialog đã được mở lại (Back rồi Forward nhanh)
+  // thì dialog.open đã là true: bỏ qua, kẻo xóa mất photoId vừa mở lại.
   const handleClose = () => {
-    if (open) onClose();
+    if (open && !dialogRef.current?.open) onClose();
   };
 
   const move = (target) => {
@@ -69,8 +70,9 @@ export function PhotoLightbox({ photo, prev, next, position, hrefFor, onClose })
               <button type="button" aria-disabled={prev ? undefined : 'true'} onClick={() => move(prev)}>
                 Ảnh trước
               </button>
-              <span>
-                Ảnh {position.index + 1}/{position.total}
+              {/* Vùng status: đổi ảnh bằng nút thì focus vẫn ở nút, nên phải báo ảnh mới (WCAG 4.1.3). */}
+              <span role="status">
+                Ảnh {position.index + 1}/{position.total}: {photo.title}
               </span>
               <button type="button" aria-disabled={next ? undefined : 'true'} onClick={() => move(next)}>
                 Ảnh sau

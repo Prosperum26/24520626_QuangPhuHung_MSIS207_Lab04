@@ -6,7 +6,7 @@ Thư viện ảnh nhiều route: lọc danh mục và mở ảnh bằng liên k�
 |---|---|
 | Deep link bằng `useSearchParams()` cho danh mục và ảnh đang mở | [client/src/hooks/useGalleryParams.js](client/src/hooks/useGalleryParams.js), [pages/GalleryPage.jsx](client/src/pages/GalleryPage.jsx) |
 | Lightbox bằng `<dialog>` gốc | [client/src/components/PhotoLightbox.jsx](client/src/components/PhotoLightbox.jsx) |
-| WCAG 2.2 AA và Lighthouse 100 | kiểm chứng ở [TASK_DECOMPOSITION.md](TASK_DECOMPOSITION.md) §7 và [evidence/](evidence/) |
+| Truy cập (WCAG 2.2 AA) và Lighthouse 100 | kết quả đo và phần chưa kiểm ở [TASK_DECOMPOSITION.md](TASK_DECOMPOSITION.md) §7 và [evidence/](evidence/) |
 
 - Hợp đồng URL: [gallery-url-contract.md](../shared/gallery-url-contract.md)
 - Kế hoạch và trạng thái: [TASK_DECOMPOSITION.md](TASK_DECOMPOSITION.md)

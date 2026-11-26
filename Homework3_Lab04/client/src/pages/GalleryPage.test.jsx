@@ -61,7 +61,7 @@ describe('GalleryPage', () => {
     renderAt('/?category=document&photoId=p06');
     expect(dialog()).toHaveAttribute('open');
     expect(screen.getByRole('dialog', { name: photoById('p06').title })).toBeInTheDocument();
-    expect(screen.getByText('Ảnh 2/4')).toBeInTheDocument();
+    expect(screen.getByRole('dialog').querySelector('[role="status"]')).toHaveTextContent('Ảnh 2/4');
   });
 
   it('bấm thumbnail mở lightbox và ghi cả category lẫn photoId vào URL', async () => {
