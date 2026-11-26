@@ -1,0 +1,130 @@
+{
+  "log": [
+    {
+      "step": "ván mới",
+      "card": "Linh, 21",
+      "summary": "Linh, 21",
+      "score": "0",
+      "remaining": "12/12",
+      "status": "Ván mới bắt đầu.",
+      "alert": null
+    },
+    {
+      "step": "phím ArrowRight",
+      "card": "Minh, 23",
+      "summary": "Minh, 23",
+      "score": "10",
+      "remaining": "11/12",
+      "status": "Đã thích Linh. Điểm 10.",
+      "alert": null
+    },
+    {
+      "step": "phím ArrowUp",
+      "card": "Trang, 22",
+      "summary": "Trang, 22",
+      "score": "30",
+      "remaining": "10/12",
+      "status": "Đã siêu thích Minh. Điểm 30.",
+      "alert": null
+    },
+    {
+      "step": "phím ArrowLeft",
+      "card": "Khoa, 24",
+      "summary": "Khoa, 24",
+      "score": "25",
+      "remaining": "9/12",
+      "status": "Đã bỏ qua Trang. Điểm 25.",
+      "alert": null
+    },
+    {
+      "step": "phím Backspace (hoàn tác)",
+      "card": "Trang, 22",
+      "summary": "Trang, 22",
+      "score": "30",
+      "remaining": "10/12",
+      "status": "Đã hoàn tác. Điểm 30.",
+      "alert": null
+    },
+    {
+      "step": "kéo 60px (chưa qua ngưỡng)",
+      "drag": null
+    },
+    {
+      "step": "kéo 150px: nhãn trong lúc kéo",
+      "stamp": "THÍCH"
+    },
+    {
+      "step": "sau khi thả chuột (kéo phải 150px)",
+      "card": "Khoa, 24",
+      "summary": "Khoa, 24",
+      "score": "40",
+      "remaining": "9/12",
+      "status": "Đã thích Trang. Điểm 40.",
+      "alert": null
+    },
+    {
+      "step": "click thẻ không kéo",
+      "card": "Khoa, 24",
+      "summary": "Khoa, 24",
+      "score": "40",
+      "remaining": "9/12",
+      "status": "Đã thích Trang. Điểm 40.",
+      "alert": null
+    },
+    {
+      "step": "F5: tải lại trang",
+      "card": "Khoa, 24",
+      "summary": "Khoa, 24",
+      "score": "40",
+      "remaining": "9/12",
+      "status": "",
+      "alert": null
+    }
+  ],
+  "overflow375": 0,
+  "overflow320": 0,
+  "afterReload": {
+    "card": "Khoa, 24",
+    "summary": "Khoa, 24",
+    "score": "40",
+    "remaining": "9/12",
+    "status": "",
+    "alert": null
+  },
+  "tabOrder": [
+    "BUTTON Ván mới",
+    "BUTTON ← Bỏ qua",
+    "BUTTON ↑ Siêu thích",
+    "BUTTON → Thích",
+    "BUTTON ⌫ Hoàn tác",
+    "BODY Hẹn Hò Nhưng Không YêuVán mớiĐiểm40Còn lại9/12Khoa, 24Rủ đi chơi lúc 11 giờ đêm, hủy lúc 10 giờ 59.← Bỏ qua↑ Siêu thích→ Thích⌫ Hoàn tácPhím tắt: ← bỏ qua, ↑ siêu thích, → thích, Backspace hoàn tác."
+  ],
+  "buttons": [
+    {
+      "name": "Ván mới",
+      "disabled": false
+    },
+    {
+      "name": "Bỏ qua",
+      "disabled": false
+    },
+    {
+      "name": "Siêu thích",
+      "disabled": false
+    },
+    {
+      "name": "Thích",
+      "disabled": false
+    },
+    {
+      "name": "Hoàn tác",
+      "disabled": false
+    }
+  ],
+  "apiSwipes": [
+    "right",
+    "up",
+    "right"
+  ],
+  "consoleErrors": []
+}
