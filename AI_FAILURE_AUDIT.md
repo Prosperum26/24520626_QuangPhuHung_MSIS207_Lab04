@@ -46,7 +46,7 @@ Mục 7 đến 9 có thật trong lịch sử repo; bạn vẫn cần tự kiể
 ### Mục 2: Vitest báo "failed to find the current suite" khi chạy từ đường dẫn ổ đĩa chữ thường (Homework 2, H2-01)
 
 - **Prompt:** cùng yêu cầu như Mục 1 (làm hết plan H2 trong một phiên). Lệnh test do AI tự chạy: `npm test` trong `Homework2_Lab04/server`, thư mục làm việc của AI lúc đó là `c:\Dev\Projects\...` (ổ `c:` viết thường).
-- **Output sai:** AI chạy test 8 case của `appealRules` từ thư mục `c:/...` và nhận lỗi, rồi mất vài lượt kiểm tra sai hướng: đọc lại file test, thử thêm một test tối thiểu `expect(1).toBe(1)`, và kiểm tra có hai bản vitest hay không bằng `npm ls vitest`.
+- **Output sai:** AI chạy test 8 case của `appealRules` từ thư mục `c:/...` và nhận lỗi, rồi mất vài lượt kiểm tra: thử một test tối thiểu `expect(1).toBe(1)` (vẫn lỗi) và kiểm tra có hai bản vitest hay không bằng `npm ls vitest`.
 - **Vì sao sai:** thông báo lỗi không nói gì về đường dẫn. Cùng một file được nạp hai lần dưới hai cách viết ổ đĩa (`c:` và `C:`), nên `vitest` được import thành hai module khác nhau; test đăng ký vào bản này nhưng runner đọc từ bản kia. Đây là trường hợp lỗi của công cụ nhưng AI cần tự tìm ra nguyên nhân thay vì đoán.
 - **Bằng chứng:**
   - `TypeError: Cannot read properties of undefined (reading 'config')` ở `describe(...)`, rồi (với test tối thiểu) `Error: Vitest failed to find the current suite. One of the following is possible:`.
