@@ -1,6 +1,6 @@
 import { pathToFileURL } from 'node:url';
 import { connectDb, disconnectDb } from './db.js';
-import { Profile } from './models.js';
+import { Game, Profile, Swipe } from './models.js';
 
 /** 12 hồ sơ hư cấu (6 nam, 6 nữ). Thứ tự ở đây = thứ tự thẻ trong deck. */
 export const SEED_PROFILES = Object.freeze([
@@ -19,11 +19,12 @@ export const SEED_PROFILES = Object.freeze([
 ]);
 
 /**
- * Xoá rồi nạp lại bảng profiles. Không đụng tới games và swipes.
+ * Làm lại từ đầu: xoá mọi ván, lượt quẹt và hồ sơ, rồi nạp lại hồ sơ.
+ * Hồ sơ mới có id mới, nên giữ ván cũ sẽ để lại swipe trỏ tới hồ sơ không còn tồn tại.
  * @returns {Promise<number>} số hồ sơ đã nạp
  */
 export async function seedProfiles() {
-  await Profile.deleteMany({});
+  await Promise.all([Swipe.deleteMany({}), Game.deleteMany({}), Profile.deleteMany({})]);
   const docs = await Profile.insertMany(SEED_PROFILES);
   return docs.length;
 }

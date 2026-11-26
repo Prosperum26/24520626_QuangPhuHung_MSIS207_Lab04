@@ -163,7 +163,7 @@ it('toDto trả id chuỗi, không có _id và __v', async () => { /* ... */ });
 **Files:** tạo `server/src/app.js`, `server/src/seed.js`, `server/src/app.profiles.test.js`, `server/src/seed.test.js`.
 
 **Interfaces:**
-- Produces: `createApp({ clientOrigin = 'http://localhost:5174' } = {}) → express.Application`; `SEED_PROFILES` (12 phần tử: 6 `male`, 6 `female`); `seedProfiles(): Promise<number>` (xoá rồi `insertMany`, trả số hồ sơ).
+- Produces: `createApp({ clientOrigin = 'http://localhost:5174' } = {}) → express.Application`; `SEED_PROFILES` (12 phần tử: 6 `male`, 6 `female`); `seedProfiles(): Promise<number>` (xoá mọi `Swipe`, `Game`, `Profile` rồi `insertMany`, trả số hồ sơ; người dùng chốt 2026-11-26).
 
 - [ ] **Bước 1:** test đỏ:
   - `GET /api/profiles` trên DB rỗng → `200 []`.

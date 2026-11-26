@@ -75,7 +75,7 @@ Hai project chạy song song được với Exercise: server cổng **3002**, cl
 // index unique { gameId: 1, profileId: 1 }: không quẹt một hồ sơ hai lần trong một ván.
 ```
 
-Seed: 12 hồ sơ (6 nam, 6 nữ), tên và giới thiệu tiếng Việt, vui, không lấy người thật. Chạy bằng `npm run seed` (xoá rồi nạp lại `profiles`). Thứ tự thẻ = thứ tự `_id`.
+Seed: 12 hồ sơ (6 nam, 6 nữ), tên và giới thiệu tiếng Việt, vui, không lấy người thật. Chạy bằng `npm run seed` (xoá mọi ván, lượt quẹt và hồ sơ rồi nạp lại; người dùng chốt 2026-11-26 để không còn swipe trỏ tới hồ sơ đã mất). Thứ tự thẻ = thứ tự `_id`.
 
 ### 5.2 API (viết vào `shared/api-contract.md` trước khi code)
 

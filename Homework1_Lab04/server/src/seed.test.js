@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Profile } from './models.js';
+import { Game, Profile, Swipe } from './models.js';
 import { SEED_PROFILES, seedProfiles } from './seed.js';
 import { useTestDb } from './test/db.js';
 
@@ -27,5 +27,15 @@ describe('seedProfiles', () => {
     await seedProfiles();
     await seedProfiles();
     expect(await Profile.countDocuments()).toBe(12);
+  });
+
+  it('xoá mọi ván và lượt quẹt cũ để không còn swipe trỏ tới hồ sơ đã mất', async () => {
+    await seedProfiles();
+    const game = await Game.create({});
+    const profile = await Profile.findOne();
+    await Swipe.create({ gameId: game._id, profileId: profile._id, direction: 'right' });
+    await seedProfiles();
+    expect(await Game.countDocuments()).toBe(0);
+    expect(await Swipe.countDocuments()).toBe(0);
   });
 });

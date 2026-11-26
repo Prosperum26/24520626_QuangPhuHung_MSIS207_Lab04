@@ -52,7 +52,7 @@ Hợp đồng giữa `Homework1_Lab04/client` và `Homework1_Lab04/server`. Vi�
 |---|---|---|
 | Thành công | `200` | `Profile[]` theo thứ tự `_id` (thứ tự nạp seed) |
 
-Hồ sơ chỉ được nạp bằng script `npm run seed`; không có API ghi hồ sơ.
+Hồ sơ chỉ được nạp bằng script `npm run seed`; không có API ghi hồ sơ. Seed **xoá luôn mọi ván và lượt quẹt** (hồ sơ mới có id mới, swipe cũ sẽ trỏ vào hồ sơ không còn tồn tại); lần mở app kế tiếp bắt đầu ván mới.
 
 ### 3.2 GET /api/games/current
 
