@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
+import { AppealReceipt } from '../components/AppealReceipt.jsx';
 import { DisproportionalityMatrix } from '../components/DisproportionalityMatrix.jsx';
+import { AppealForm } from '../form/AppealForm.jsx';
 import { SlaCountdown } from '../components/SlaCountdown.jsx';
 import { SANCTION_LABEL, computeMatrix } from '../domain/matrix.js';
 import { useAppealSlaTimer } from '../hooks/useAppealSlaTimer.js';
@@ -33,7 +35,7 @@ export default function DossierPage() {
  * Hồ sơ đã tải xong. Tách khỏi DossierPage để hook đồng hồ chỉ chạy khi đã có hạn SLA.
  * @param {{ dossier: object, onAppealSubmitted: (appeal: object) => void }} props
  */
-function DossierView({ dossier }) {
+function DossierView({ dossier, onAppealSubmitted }) {
   // Ma trận dẫn xuất trong render (slide 33): chỉ tính lại khi hồ sơ đổi.
   const matrix = useMemo(() => computeMatrix(dossier), [dossier]);
   const timer = useAppealSlaTimer(dossier.appealDeadline);
@@ -67,7 +69,14 @@ function DossierView({ dossier }) {
 
       <section aria-labelledby="appeal-title" className={styles.card}>
         <h3 id="appeal-title">Kháng cáo</h3>
-        <SlaCountdown {...timer} />
+        {dossier.appeal ? (
+          <AppealReceipt appeal={dossier.appeal} />
+        ) : (
+          <>
+            <SlaCountdown {...timer} />
+            <AppealForm playerId={dossier.id} disabled={timer.expired} onSubmitted={onAppealSubmitted} />
+          </>
+        )}
       </section>
 
       <section aria-labelledby="sources-title">

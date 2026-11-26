@@ -1,0 +1,74 @@
+.field {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.field > label {
+  font-weight: 600;
+}
+
+.hint {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  font: inherit;
+}
+
+textarea.input {
+  resize: vertical;
+}
+
+/* Ô lỗi: viền dày hơn và có chữ báo lỗi, không chỉ dựa vào màu (WCAG 1.4.1). */
+.input[aria-invalid='true'] {
+  border-color: var(--color-danger);
+  border-width: 2px;
+}
+
+.input:disabled {
+  opacity: 0.7;
+}
+
+.group {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius);
+}
+
+.group legend {
+  font-weight: 600;
+  padding: 0 var(--space-1);
+}
+
+.check {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  min-height: 1.5rem;
+}
+
+.check input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0.125rem 0 0;
+  flex: none;
+}
+
+.error {
+  margin: 0;
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
