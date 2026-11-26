@@ -332,7 +332,7 @@ Ghi output thật vào đây khi làm xong từng gate.
 | Grep cấm (§2) | 0 dòng: `react-router-dom\|keyCode\|defaultProps\|dangerouslySetInnerHTML\|alert\(`; `useEffect` chỉ có trong `PhotoLightbox.jsx`; `GalleryPage.jsx` không có `useState` |
 | axe-core trong jsdom | 0 vi phạm ở 6 trạng thái (`/`, `/?category=scene`, deep link mở ảnh, `photoId` lạ, `/about`, 404); đã tắt rule `color-contrast` vì jsdom không tính được |
 | E2E trên Edge headless | 22/22, xem [evidence/e2e-edge.json](evidence/e2e-edge.json) và 5 ảnh `evidence/0*.png` |
-| Review cả nhánh (subagent) | 5 phát hiện: 2 sửa (test đỏ rồi xanh), 3 Minor để lại; 1 phát hiện về lời khẳng định quá mức đã sửa bằng cách thu hẹp câu chữ |
+| Review cả nhánh (subagent) | 5 phát hiện: 3 đã xử lý (2 có test đỏ rồi xanh, 1 sửa bằng cách thu hẹp câu chữ), 2 Minor để lại |
 
 **Lighthouse** (4 hạng mục chuẩn; báo cáo trong `evidence/lighthouse-hw3-*`):
 
