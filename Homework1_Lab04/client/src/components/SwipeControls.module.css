@@ -1,0 +1,48 @@
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  inline-size: var(--card-width);
+  margin-inline: auto;
+}
+
+.button {
+  min-block-size: var(--control-height);
+  padding: var(--space-2);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button[data-direction='left'] {
+  border-color: var(--color-pass);
+  color: var(--color-pass);
+}
+
+.button[data-direction='up'] {
+  border-color: var(--color-super);
+  color: var(--color-super);
+}
+
+.button[data-direction='right'] {
+  border-color: var(--color-like);
+  color: var(--color-like);
+}
+
+.button:hover:not(:disabled) {
+  background: var(--color-tint);
+}
+
+.button:disabled {
+  border-color: var(--color-border-soft);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.undo {
+  grid-column: 1 / -1;
+}
