@@ -33,8 +33,11 @@ export function useDossier(playerId) {
   }, [playerId, key]);
 
   const current = result.key === key;
+  // Chỉ gắn đơn vào đúng hồ sơ của nó: POST về muộn sau khi đã sang hồ sơ khác thì bỏ qua.
   const setAppeal = (appeal) =>
-    setResult((prev) => (prev.dossier ? { ...prev, dossier: { ...prev.dossier, appeal } } : prev));
+    setResult((prev) =>
+      prev.dossier && prev.dossier.id === appeal.playerId ? { ...prev, dossier: { ...prev.dossier, appeal } } : prev,
+    );
 
   return {
     status: current ? result.status : 'loading',

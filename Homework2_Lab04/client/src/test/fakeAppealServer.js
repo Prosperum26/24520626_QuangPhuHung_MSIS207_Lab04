@@ -35,10 +35,11 @@ export function installFakeAppealServer({
   const serverNow = () => Date.now() + serverOffsetMs;
   const appealDeadline = serverNow() + deadlineInMs;
   const db = { dossiers: dossiers.map((d) => ({ ...d, appealDeadline, appeal: null })) };
-  const state = { hold: false, fail: null };
+  const state = { hold: false, holdPost: false, fail: null };
   /** @type {{ method: string, path: string, signal?: AbortSignal }[]} */
   const requests = [];
   const pending = [];
+  const pendingPosts = [];
 
   function route(method, path, body) {
     if (state.fail === 500) return json(500, { error: 'Internal server error' });
@@ -71,10 +72,11 @@ export function installFakeAppealServer({
     if (state.fail === 'network') return Promise.reject(new TypeError('Failed to fetch'));
     const body = init.body ? JSON.parse(init.body) : undefined;
     const respond = () => route(method, path, body);
-    if (!state.hold) return Promise.resolve(respond());
+    const holdThis = state.hold || (state.holdPost && method === 'POST');
+    if (!holdThis) return Promise.resolve(respond());
     return new Promise((resolve, reject) => {
       signal?.addEventListener('abort', () => reject(abortError()));
-      pending.push(() => resolve(respond()));
+      (method === 'POST' && !state.hold ? pendingPosts : pending).push(() => resolve(respond()));
     });
   });
   vi.stubGlobal('fetch', fetchMock);
@@ -88,6 +90,11 @@ export function installFakeAppealServer({
     release() {
       state.hold = false;
       for (const resolve of pending.splice(0)) resolve();
+    },
+    /** state.holdPost = true giữ riêng các POST; gọi hàm này để thả chúng. */
+    releasePosts() {
+      state.holdPost = false;
+      for (const resolve of pendingPosts.splice(0)) resolve();
     },
   };
 }

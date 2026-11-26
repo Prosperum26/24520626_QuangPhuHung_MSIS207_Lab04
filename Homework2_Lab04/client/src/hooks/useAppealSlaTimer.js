@@ -53,5 +53,7 @@ export function useAppealSlaTimer(deadlineMs) {
 
   // Dẫn xuất trong render từ mốc tuyệt đối.
   const remainingMs = Math.max(0, deadlineMs - (now + clock.offsetMs));
-  return { remainingMs, expired: remainingMs === 0, synced: clock.synced };
+  // Chưa đo được độ lệch thì không kết luận hết hạn theo giờ máy (máy có thể chạy nhanh);
+  // server vẫn chặn đơn quá hạn bằng 409.
+  return { remainingMs, expired: clock.synced && remainingMs === 0, synced: clock.synced };
 }

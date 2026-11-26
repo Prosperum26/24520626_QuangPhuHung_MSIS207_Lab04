@@ -14,8 +14,8 @@ function focusField(form, name) {
   target?.focus();
 }
 
-/** @param {{ playerId: string, onSubmitted: (appeal: object) => void }} props */
-function AppealFormBody({ playerId, onSubmitted }) {
+/** @param {{ playerId: string, onSubmitted: (appeal: object) => void, onAlreadySubmitted: () => void }} props */
+function AppealFormBody({ playerId, onSubmitted, onAlreadySubmitted }) {
   const titleId = useId();
   const { values, errors, isValid, submitted, disabled, markSubmitted, setServerErrors } = useAppealForm();
   const [sending, setSending] = useState(false);
@@ -38,7 +38,10 @@ function AppealFormBody({ playerId, onSubmitted }) {
     try {
       onSubmitted(await submitAppeal(playerId, toAppeal(values)));
     } catch (err) {
-      if (err instanceof ApiError && err.fields) {
+      if (err instanceof ApiError && err.status === 409 && err.message === 'Appeal already submitted') {
+        // Đơn đã được nộp ở nơi khác (tab khác): tải lại hồ sơ để hiện biên nhận thật.
+        onAlreadySubmitted();
+      } else if (err instanceof ApiError && err.fields) {
         markSubmitted();
         setServerErrors(err.fields);
         focusField(form, FIELD_ORDER.find((f) => f in err.fields));
@@ -86,12 +89,12 @@ function AppealFormBody({ playerId, onSubmitted }) {
 
 /**
  * Form kháng cáo: state dùng chung qua Context, validate real-time bằng luật chung với server.
- * @param {{ playerId: string, disabled: boolean, onSubmitted: (appeal: object) => void }} props
+ * @param {{ playerId: string, disabled: boolean, onSubmitted: (appeal: object) => void, onAlreadySubmitted?: () => void }} props
  */
-export function AppealForm({ playerId, disabled, onSubmitted }) {
+export function AppealForm({ playerId, disabled, onSubmitted, onAlreadySubmitted = () => {} }) {
   return (
     <AppealFormProvider disabled={disabled}>
-      <AppealFormBody playerId={playerId} onSubmitted={onSubmitted} />
+      <AppealFormBody playerId={playerId} onSubmitted={onSubmitted} onAlreadySubmitted={onAlreadySubmitted} />
     </AppealFormProvider>
   );
 }

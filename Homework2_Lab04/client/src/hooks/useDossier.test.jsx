@@ -54,7 +54,9 @@ describe('useDossier', () => {
     installFakeAppealServer();
     const { result } = renderHook(() => useDossier('himass'));
     await waitFor(() => expect(result.current.status).toBe('ready'));
-    act(() => result.current.setAppeal({ id: 'a1', submittedAt: 1 }));
-    expect(result.current.dossier.appeal).toEqual({ id: 'a1', submittedAt: 1 });
+    act(() => result.current.setAppeal({ id: 'a0', playerId: 'tanvuu', submittedAt: 1 }));
+    expect(result.current.dossier.appeal).toBeNull();
+    act(() => result.current.setAppeal({ id: 'a1', playerId: 'himass', submittedAt: 1 }));
+    expect(result.current.dossier.appeal).toEqual({ id: 'a1', playerId: 'himass', submittedAt: 1 });
   });
 });

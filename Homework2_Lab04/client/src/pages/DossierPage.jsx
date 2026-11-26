@@ -28,14 +28,14 @@ export default function DossierPage() {
     );
   }
   // key: đổi hồ sơ thì dựng lại toàn bộ (form, đồng hồ) từ đầu.
-  return <DossierView key={dossier.id} dossier={dossier} onAppealSubmitted={setAppeal} />;
+  return <DossierView key={dossier.id} dossier={dossier} onAppealSubmitted={setAppeal} onReload={retry} />;
 }
 
 /**
  * Hồ sơ đã tải xong. Tách khỏi DossierPage để hook đồng hồ chỉ chạy khi đã có hạn SLA.
- * @param {{ dossier: object, onAppealSubmitted: (appeal: object) => void }} props
+ * @param {{ dossier: object, onAppealSubmitted: (appeal: object) => void, onReload: () => void }} props
  */
-function DossierView({ dossier, onAppealSubmitted }) {
+function DossierView({ dossier, onAppealSubmitted, onReload }) {
   // Ma trận dẫn xuất trong render (slide 33): chỉ tính lại khi hồ sơ đổi.
   const matrix = useMemo(() => computeMatrix(dossier), [dossier]);
   const timer = useAppealSlaTimer(dossier.appealDeadline);
@@ -74,7 +74,7 @@ function DossierView({ dossier, onAppealSubmitted }) {
         ) : (
           <>
             <SlaCountdown {...timer} />
-            <AppealForm playerId={dossier.id} disabled={timer.expired} onSubmitted={onAppealSubmitted} />
+            <AppealForm playerId={dossier.id} disabled={timer.expired} onSubmitted={onAppealSubmitted} onAlreadySubmitted={onReload} />
           </>
         )}
       </section>

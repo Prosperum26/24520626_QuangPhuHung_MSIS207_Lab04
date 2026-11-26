@@ -1,6 +1,6 @@
-import { render, renderHook, screen, waitFor } from '@testing-library/react';
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter, useNavigate } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
 import { installFakeAppealServer } from '../test/fakeAppealServer.js';
 import { App } from '../App.jsx';
@@ -153,6 +153,46 @@ describe('DossierPage + form', () => {
     renderAt('/dossier/himass');
     expect(await screen.findByRole('heading', { name: 'Đã nộp đơn' })).toBeInTheDocument();
     expect(screen.getByText('a@b.vn')).toBeInTheDocument();
+  });
+
+  it('review #1: POST về muộn sau khi đã sang hồ sơ khác thì không gắn đơn vào hồ sơ mới', async () => {
+    const server = installFakeAppealServer();
+    const user = userEvent.setup();
+    // Chuyển thẳng hồ sơ → hồ sơ (như Back/Forward hay sửa URL): DossierPage không bị unmount.
+    let navigate;
+    function GrabNavigate() {
+      navigate = useNavigate();
+      return null;
+    }
+    render(
+      <MemoryRouter initialEntries={['/dossier/himass']}>
+        <GrabNavigate />
+        <App />
+      </MemoryRouter>,
+    );
+    await screen.findByRole('heading', { level: 2, name: 'Himass' });
+    await fillValid(user);
+    server.state.holdPost = true;
+    await user.click(submitButton());
+    act(() => navigate('/dossier/tanvuu'));
+    await screen.findByRole('heading', { level: 2, name: 'TanVuu' });
+    server.releasePosts();
+    await waitFor(() => expect(server.db.dossiers[0].appeal).not.toBeNull());
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    expect(screen.queryByRole('heading', { name: 'Đã nộp đơn' })).not.toBeInTheDocument();
+    expect(submitButton()).toBeEnabled();
+  });
+
+  it('review #2: tab khác đã nộp (409 already) thì tải lại hồ sơ và hiện biên nhận', async () => {
+    const server = installFakeAppealServer();
+    const user = userEvent.setup();
+    renderAt('/dossier/himass');
+    await screen.findByRole('heading', { level: 2, name: 'Himass' });
+    await fillValid(user);
+    server.db.dossiers[0].appeal = { id: 'a-other', playerId: 'himass', submittedAt: Date.now(), email: 'tab@khac.vn', grounds: ['disproportionate'], statement: 'x', evidenceUrl: '', confirm: true };
+    await user.click(submitButton());
+    expect(await screen.findByRole('heading', { name: 'Đã nộp đơn' })).toBeInTheDocument();
+    expect(screen.getByText('tab@khac.vn')).toBeInTheDocument();
   });
 
   it('hồ sơ đã hết hạn thì form bị khoá', async () => {

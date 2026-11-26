@@ -50,6 +50,17 @@ describe('useAppealSlaTimer', () => {
     expect(Math.abs(result.current.remainingMs - 60_000)).toBeLessThanOrEqual(1_000);
   });
 
+  it('review #3: đồng hồ máy nhanh hơn phần còn lại thì chưa sync không báo hết hạn', async () => {
+    const server = installFakeAppealServer({ serverOffsetMs: -600_000, deadlineInMs: 60_000 });
+    const deadline = server.db.dossiers[0].appealDeadline;
+    const { result } = renderHook(() => useAppealSlaTimer(deadline));
+    expect(result.current.synced).toBe(false);
+    expect(result.current.expired).toBe(false);
+    await until(() => expect(result.current.synced).toBe(true));
+    expect(result.current.expired).toBe(false);
+    expect(Math.abs(result.current.remainingMs - 60_000)).toBeLessThanOrEqual(1_000);
+  });
+
   it('đếm xuống theo interval 200ms, tính lại từ mốc tuyệt đối', async () => {
     const server = installFakeAppealServer({ deadlineInMs: 10_000 });
     const deadline = server.db.dossiers[0].appealDeadline;
