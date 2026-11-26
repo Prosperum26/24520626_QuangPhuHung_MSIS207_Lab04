@@ -1,0 +1,52 @@
+.skip {
+  position: absolute;
+  left: var(--space-2);
+  top: -4rem;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 2px solid var(--color-focus);
+  border-radius: var(--radius);
+  z-index: 10;
+}
+
+.skip:focus {
+  top: var(--space-2);
+}
+
+.header {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.note {
+  margin: var(--space-1) 0 var(--space-3);
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.link {
+  display: inline-block;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  line-height: 1.75rem;
+  color: var(--color-accent);
+}
+
+/* Trang hiện tại: đậm và gạch chân, không chỉ dựa vào màu (WCAG 1.4.1). */
+.active {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.main {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
