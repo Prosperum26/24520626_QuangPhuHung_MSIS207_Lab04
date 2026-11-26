@@ -72,10 +72,10 @@ Homework1_Lab04/
 
 | ID | Task | Gate | Trạng thái |
 |---|---|---|---|
-| H1-00 | Hạ tầng: compose, env, sắp lại thứ tự Homework | `docker compose up -d` + ping Mongo | [ ] |
-| H1-01 | API contract | File contract được commit trước code | [ ] |
-| H1-02 | Server: khung, kết nối DB, model | Test model xanh | [ ] |
-| H1-03 | `GET /api/profiles` + seed | Test route + `npm run seed` | [ ] |
+| H1-00 | Hạ tầng: compose, env, sắp lại thứ tự Homework | `docker compose up -d` + ping Mongo | [x] |
+| H1-01 | API contract | File contract được commit trước code | [x] |
+| H1-02 | Server: khung, kết nối DB, model | Test model xanh | [x] |
+| H1-03 | `GET /api/profiles` + seed | Test route + `npm run seed` | [x] |
 | H1-04 | Route ván: `GET /api/games/current`, `POST /api/games` | Test route xanh | [ ] |
 | H1-05 | Route quẹt: `POST` và `DELETE .../last` | Test 201/400/404/409 xanh | [ ] |
 | H1-06 | `server.js` chạy thật | `curl` trên server thật | [ ] |
