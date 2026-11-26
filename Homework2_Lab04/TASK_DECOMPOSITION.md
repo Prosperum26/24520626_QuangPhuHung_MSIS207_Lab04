@@ -426,7 +426,7 @@ Slide 21 và slide 18 tính phần này 15% điểm. **AI không viết nội du
 | Hạng mục | Kết quả |
 |---|---|
 | Server `npm test` | 30/30 (luật dùng chung 8, store 7, API 15) |
-| Client `npm test` | 42/42 (domain 8, `useDossier` 5, `useAppealSlaTimer` 7, trang hồ sơ 6, form 11, App 2, còn lại 3) |
+| Client `npm test` | 42/42 (domain 8, `useDossier` 5, `useAppealSlaTimer` 7, trang hồ sơ 6, form 14, App 2) |
 | `npm run lint` (client) | 0 lỗi |
 | `npm run build` (client) | chạy được, có tách chunk `DossierPage` |
 | Grep cấm (§1) | 0 dòng: `react-router-dom\|keyCode\|defaultProps\|dangerouslySetInnerHTML`; `useEffect` trong `form/` và `domain/`; `s - 1\|remaining - ` trong hook timer |
