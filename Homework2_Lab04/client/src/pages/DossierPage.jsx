@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 import { DisproportionalityMatrix } from '../components/DisproportionalityMatrix.jsx';
+import { SlaCountdown } from '../components/SlaCountdown.jsx';
 import { SANCTION_LABEL, computeMatrix } from '../domain/matrix.js';
+import { useAppealSlaTimer } from '../hooks/useAppealSlaTimer.js';
 import { useDossier } from '../hooks/useDossier.js';
 import { NotFound } from './NotFound.jsx';
 import styles from './DossierPage.module.css';
@@ -9,10 +11,7 @@ import styles from './DossierPage.module.css';
 /** Trang /dossier/:playerID. useParams trả chuỗi; id hồ sơ quy ước chữ thường. */
 export default function DossierPage() {
   const { playerID = '' } = useParams();
-  const { status, dossier, error, retry } = useDossier(playerID.toLowerCase());
-
-  // Ma trận dẫn xuất trong render (slide 33): chỉ tính lại khi hồ sơ đổi.
-  const matrix = useMemo(() => computeMatrix(dossier), [dossier]);
+  const { status, dossier, error, retry, setAppeal } = useDossier(playerID.toLowerCase());
 
   if (status === 'loading') return <p role="status">Đang tải hồ sơ…</p>;
   if (status === 'not-found') return <NotFound title="Không tìm thấy hồ sơ" />;
@@ -26,8 +25,20 @@ export default function DossierPage() {
       </div>
     );
   }
+  // key: đổi hồ sơ thì dựng lại toàn bộ (form, đồng hồ) từ đầu.
+  return <DossierView key={dossier.id} dossier={dossier} onAppealSubmitted={setAppeal} />;
+}
 
+/**
+ * Hồ sơ đã tải xong. Tách khỏi DossierPage để hook đồng hồ chỉ chạy khi đã có hạn SLA.
+ * @param {{ dossier: object, onAppealSubmitted: (appeal: object) => void }} props
+ */
+function DossierView({ dossier }) {
+  // Ma trận dẫn xuất trong render (slide 33): chỉ tính lại khi hồ sơ đổi.
+  const matrix = useMemo(() => computeMatrix(dossier), [dossier]);
+  const timer = useAppealSlaTimer(dossier.appealDeadline);
   const { sanction } = dossier;
+
   return (
     <article className={styles.page} aria-labelledby="dossier-title">
       <header>
@@ -53,6 +64,11 @@ export default function DossierPage() {
       </section>
 
       <DisproportionalityMatrix matrix={matrix} sanctionKind={sanction.kind} />
+
+      <section aria-labelledby="appeal-title" className={styles.card}>
+        <h3 id="appeal-title">Kháng cáo</h3>
+        <SlaCountdown {...timer} />
+      </section>
 
       <section aria-labelledby="sources-title">
         <h3 id="sources-title">Nguồn</h3>

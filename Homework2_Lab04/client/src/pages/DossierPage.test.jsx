@@ -25,6 +25,19 @@ describe('DossierPage', () => {
     expect(source).toHaveAttribute('rel', 'noreferrer');
   });
 
+  it('hiện đồng hồ SLA đếm theo hạn của server', async () => {
+    installFakeAppealServer({ deadlineInMs: 2 * 3_600_000 });
+    renderAt('/dossier/tanvuu');
+    const timer = await screen.findByRole('timer', { name: 'Thời gian còn lại để kháng cáo' });
+    expect(timer.textContent).toMatch(/^0[12]:\d\d:\d\d$/);
+  });
+
+  it('hạn đã qua thì báo hết hạn', async () => {
+    installFakeAppealServer({ deadlineInMs: -1 });
+    renderAt('/dossier/tanvuu');
+    expect(await screen.findByText('Đã hết hạn kháng cáo')).toBeInTheDocument();
+  });
+
   it('/dossier/HIMASS cũng mở được', async () => {
     installFakeAppealServer();
     renderAt('/dossier/HIMASS');
