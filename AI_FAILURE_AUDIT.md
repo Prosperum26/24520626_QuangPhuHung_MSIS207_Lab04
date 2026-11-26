@@ -1,7 +1,7 @@
 # AI Failure Audit — Lab 04
 
 > Chiếm 15% điểm. **Nội dung do bạn viết từ lỗi thật bạn đã gặp.** AI chỉ chỉnh câu chữ và định dạng, không bịa prompt, bằng chứng, commit hash hay kết quả DevTools.
-> Trạng thái: **chưa điền**. Phần "Ứng viên" bên dưới chỉ là gợi ý để bạn chọn và tự tái hiện; chưa phải mục audit.
+> Trạng thái: **đã điền Mục 1 và 2** (lỗi thật ở Homework 2, bạn xác nhận); Mục 3 còn trống. Phần "Ứng viên" bên dưới chỉ là gợi ý để bạn chọn và tự tái hiện; chưa phải mục audit.
 
 ## 1. Cách điền mỗi mục
 
@@ -35,21 +35,24 @@ Mục 7 đến 9 có thật trong lịch sử repo; bạn vẫn cần tự kiể
 
 ## 3. Các mục audit
 
-### Mục 1
+### Mục 1: Test timer treo vì `waitFor` poll bằng `setInterval` đang bị giả (Homework 2, H2-07)
 
-- **Prompt:** (bạn điền)
-- **Output sai:** (bạn điền)
-- **Vì sao sai:** (bạn điền)
-- **Bằng chứng:** (bạn điền)
-- **Cách sửa:** (bạn điền)
+- **Prompt:** "ok cũng ko nhất thiết phải chia ra nữa, thử tự làm hết trong phiên này đi, làm xong thì phân sub agent review nhanh, chụp evidence và báo cáo mình" (tin nhắn gốc của mình; cũng nằm trong prompt log nếu có). Kế hoạch do AI viết trước đó ở `Homework2_Lab04/TASK_DECOMPOSITION.md`, bước H2-07 ghi: dùng `vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval', 'Date'] })` cho test của `useAppealSlaTimer`.
+- **Output sai:** AI viết `useAppealSlaTimer.test.jsx` với `fakeTimers` giả `setInterval`, rồi chờ kết quả bất đồng bộ bằng `await waitFor(() => expect(result.current.synced).toBe(true))` của React Testing Library.
+- **Vì sao sai:** `waitFor` của RTL kiểm tra lại điều kiện theo chu kỳ bằng `setInterval`. Khi chính `setInterval` bị giả, đồng hồ giả không tự chạy nên `waitFor` không bao giờ kiểm tra lại và hết giờ. Lỗi nằm ở bài test chứ không phải ở hook.
+- **Bằng chứng:** chạy `npx vitest run src/hooks/useAppealSlaTimer.test.jsx`: 4 trong 6 test đỏ với `AssertionError: expected false to be true` ở dòng `waitFor`, mỗi test chờ khoảng 1 giây (hết timeout 1000ms của `waitFor`) rồi mới fail. Lần chạy sau khi sửa: 6/6 xanh.
+- **Cách sửa:** viết hàm `until(check)` trong file test, thử `check()` rồi nếu chưa đạt thì chờ 5ms bằng `setTimeout` thật (`setTimeout` không nằm trong `toFake`), tối đa 100 lần. Thay mọi `waitFor` trong file đó bằng `until`. Sửa nằm trong commit `2f4516c`. Hook không phải sửa gì. (Một lần sửa `sed` làm dính cả khối hàm vào một dòng comment nên `until is not defined`; đã sửa bằng Edit.)
 
-### Mục 2
+### Mục 2: Vitest báo "failed to find the current suite" khi chạy từ đường dẫn ổ đĩa chữ thường (Homework 2, H2-01)
 
-- **Prompt:** (bạn điền)
-- **Output sai:** (bạn điền)
-- **Vì sao sai:** (bạn điền)
-- **Bằng chứng:** (bạn điền)
-- **Cách sửa:** (bạn điền)
+- **Prompt:** cùng yêu cầu như Mục 1 (làm hết plan H2 trong một phiên). Lệnh test do AI tự chạy: `npm test` trong `Homework2_Lab04/server`, thư mục làm việc của AI lúc đó là `c:\Dev\Projects\...` (ổ `c:` viết thường).
+- **Output sai:** AI chạy test 8 case của `appealRules` từ thư mục `c:/...` và nhận lỗi, rồi mất vài lượt kiểm tra sai hướng: đọc lại file test, thử thêm một test tối thiểu `expect(1).toBe(1)`, và kiểm tra có hai bản vitest hay không bằng `npm ls vitest`.
+- **Vì sao sai:** thông báo lỗi không nói gì về đường dẫn. Cùng một file được nạp hai lần dưới hai cách viết ổ đĩa (`c:` và `C:`), nên `vitest` được import thành hai module khác nhau; test đăng ký vào bản này nhưng runner đọc từ bản kia. Đây là trường hợp lỗi của công cụ nhưng AI cần tự tìm ra nguyên nhân thay vì đoán.
+- **Bằng chứng:**
+  - `TypeError: Cannot read properties of undefined (reading 'config')` ở `describe(...)`, rồi (với test tối thiểu) `Error: Vitest failed to find the current suite. One of the following is possible:`.
+  - `npm ls vitest` chỉ có một bản `vitest@5.1.2`, nên không phải trùng phiên bản.
+  - Cùng lệnh `npx vitest run` nhưng chạy sau `cd "C:/Dev/Projects/..."` (chữ hoa): `Tests  8 passed (8)`.
+- **Cách sửa:** luôn `cd` bằng đường dẫn ổ chữ hoa (`C:/...`) trước khi chạy `vitest`. Không cần đổi code hay cấu hình. Chưa có commit riêng vì đây là thao tác khi chạy lệnh.
 
 ### Mục 3
 
