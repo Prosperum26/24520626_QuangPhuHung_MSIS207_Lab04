@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c2d12"/><stop offset="1" stop-color="#c2570c"/></linearGradient></defs>
+<rect width="600" height="400" fill="url(#g)"/>
+<circle cx="300" cy="200" r="100" fill="#fed7aa" fill-opacity="0.85"/><path d="M300 200 L300 100 A100 100 0 0 1 390 245 Z" fill="#ffffff" fill-opacity="0.9"/>
+<text x="30" y="52" font-family="sans-serif" font-size="30" font-weight="700" fill="#ffffff">Ảnh minh họa p10</text>
+</svg>
