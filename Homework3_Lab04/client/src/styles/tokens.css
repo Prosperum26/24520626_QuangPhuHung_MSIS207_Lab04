@@ -65,3 +65,18 @@ a {
   outline: 3px solid var(--color-focus);
   outline-offset: 2px;
 }
+
+/* Chrome không tự khóa cuộn nền khi <dialog> mở bằng showModal(): khóa tay. */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

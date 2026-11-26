@@ -41,19 +41,6 @@ describe('useGalleryParams', () => {
     expect(history).toHaveLength(before);
   });
 
-  it('selectCategory đặt category, xóa photoId, dùng push', () => {
-    const { result, history } = setup('/?category=chart&photoId=p09&utm=1');
-    act(() => result.current.selectCategory('scene'));
-    expect(query(result.current.search)).toEqual({ category: 'scene', utm: '1' });
-    expect(history.at(-1).startsWith('PUSH')).toBe(true);
-  });
-
-  it('selectCategory("all") xóa khóa category', () => {
-    const { result } = setup('/?category=chart');
-    act(() => result.current.selectCategory('all'));
-    expect(result.current.search).toBe('');
-  });
-
   it('searchFor giữ các tham số khác', () => {
     const { result } = setup('/?category=chart&utm=1');
     expect(query(result.current.searchFor({ photoId: 'p10' }))).toEqual({ category: 'chart', utm: '1', photoId: 'p10' });

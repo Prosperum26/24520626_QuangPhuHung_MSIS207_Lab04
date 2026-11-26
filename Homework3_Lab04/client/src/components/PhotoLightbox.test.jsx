@@ -12,7 +12,7 @@ function Harness({ photo, prev = null, next = null, position = { index: 0, total
   const location = useLocation();
   return (
     <Wrapper>
-      <output data-testid="search">{location.search}</output>
+      <span data-testid="search">{location.search}</span>
       <PhotoLightbox
         photo={photo}
         prev={prev}
