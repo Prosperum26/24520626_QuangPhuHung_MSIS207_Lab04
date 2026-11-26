@@ -76,11 +76,11 @@ Homework1_Lab04/
 | H1-01 | API contract | File contract được commit trước code | [x] |
 | H1-02 | Server: khung, kết nối DB, model | Test model xanh | [x] |
 | H1-03 | `GET /api/profiles` + seed | Test route + `npm run seed` | [x] |
-| H1-04 | Route ván: `GET /api/games/current`, `POST /api/games` | Test route xanh | [ ] |
-| H1-05 | Route quẹt: `POST` và `DELETE .../last` | Test 201/400/404/409 xanh | [ ] |
-| H1-06 | `server.js` chạy thật | `curl` trên server thật | [ ] |
-| H1-07 | Client: khung project, token, avatar | `npm test`, `lint`, `build` chạy | [ ] |
-| H1-08 | Domain: cấu hình + dẫn xuất | Test thuần xanh | [ ] |
+| H1-04 | Route ván: `GET /api/games/current`, `POST /api/games` | Test route xanh | [x] |
+| H1-05 | Route quẹt: `POST` và `DELETE .../last` | Test 201/400/404/409 xanh | [x] |
+| H1-06 | `server.js` chạy thật | `curl` trên server thật | [x] |
+| H1-07 | Client: khung project, token, avatar | `npm test`, `lint`, `build` chạy | [x] |
+| H1-08 | Domain: cấu hình + dẫn xuất | Test thuần xanh | [x] |
 | H1-09 | Lớp gọi API | Test với fetch giả xanh | [ ] |
 | H1-10 | Hook `useSwipeGame` | Test R1, R2, R5 xanh | [ ] |
 | H1-11 | Hook `useSwipeKeyboard` | Test phím xanh | [ ] |
