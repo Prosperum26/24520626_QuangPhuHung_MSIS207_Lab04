@@ -81,12 +81,12 @@ Homework1_Lab04/
 | H1-06 | `server.js` chạy thật | `curl` trên server thật | [x] |
 | H1-07 | Client: khung project, token, avatar | `npm test`, `lint`, `build` chạy | [x] |
 | H1-08 | Domain: cấu hình + dẫn xuất | Test thuần xanh | [x] |
-| H1-09 | Lớp gọi API | Test với fetch giả xanh | [ ] |
-| H1-10 | Hook `useSwipeGame` | Test R1, R2, R5 xanh | [ ] |
-| H1-11 | Hook `useSwipeKeyboard` | Test phím xanh | [ ] |
-| H1-12 | `SwipeCard` với pointer | Test R4 xanh | [ ] |
-| H1-13 | Ghép màn hình: nút, status, tổng kết, Ván mới | Test tích hợp xanh | [ ] |
-| H1-14 | CSS, responsive, kiểm chứng thủ công, tài liệu | Bằng chứng trong `evidence/` | [ ] |
+| H1-09 | Lớp gọi API | Test với fetch giả xanh | [x] |
+| H1-10 | Hook `useSwipeGame` | Test R1, R2, R5 xanh | [x] |
+| H1-11 | Hook `useSwipeKeyboard` | Test phím xanh | [x] |
+| H1-12 | `SwipeCard` với pointer | Test R4 xanh | [x] |
+| H1-13 | Ghép màn hình: nút, status, tổng kết, Ván mới | Test tích hợp xanh | [x] |
+| H1-14 | CSS, responsive, kiểm chứng thủ công, tài liệu | Bằng chứng trong `evidence/` | [x] |
 
 ---
 
@@ -357,4 +357,50 @@ Quyết định cài đặt:
 
 ## 6. Kết quả kiểm chứng
 
-Điền khi làm H1-14 (output thật, không tóm tắt suông).
+Đo ngày 2026-11-26 trên máy Windows 11, Node 26.13.1, MongoDB 8.0.38 (Docker), Edge headless.
+
+### 6.1 Lệnh tự động
+
+| Lệnh | Kết quả |
+|---|---|
+| `server: npm test` | 6 file, 59/59 test xanh (DB `swipe_deck_test`) |
+| `client: npm test` | 8 file, 71/71 test xanh |
+| `client: npm run lint` | 0 lỗi, 0 cảnh báo |
+| `client: npm run build` | build thành công |
+| grep `useNewUrlParser\|useUnifiedTopology\|mongodb://` trong `server/src` | 0 dòng |
+| grep `keyCode\|react-router\|defaultProps\|dangerouslySetInnerHTML\|innerHTML\|window.alert` trong `client/src` | 0 dòng |
+| grep `useEffect` trong `client/src/domain` | 0 dòng |
+| Kiểm tra đột biến H1-10: bỏ hàng đợi tuần tự | 2 test (R1, bỏ request xếp sau) đỏ như mong đợi; khôi phục lại thì xanh |
+
+### 6.2 Lighthouse 13.6.0 trên Edge (bản build, `vite preview` cổng 5174)
+
+| Chế độ | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| Mobile | 99 | 100 | 100 | 100 |
+| Desktop | 100 | 100 | 100 | 100 |
+
+Báo cáo: [mobile](evidence/lighthouse-hw1-mobile.report.html), [desktop](evidence/lighthouse-hw1-desktop.report.html).
+
+### 6.3 Chạy thử trên Edge thật (puppeteer-core, [e2e-edge.json](evidence/e2e-edge.json))
+
+| Bước | Màn hình | Đúng mong đợi |
+|---|---|---|
+| Ván mới | Linh, 21; điểm 0; còn 12/12 | Có |
+| `→`, `↑`, `←` | điểm 10, 30, 25; status "Đã thích Linh. Điểm 10." ... | Có (+10, +20, −5) |
+| `Backspace` | về Trang, 22; điểm 30; "Đã hoàn tác. Điểm 30." | Có (LIFO) |
+| Kéo chuột 60px | không có `data-drag` | Có (dưới ngưỡng 80px) |
+| Kéo chuột 150px sang phải | nhãn "THÍCH" khi kéo; thả ra thì điểm 40 | Có |
+| Click thẻ không kéo | không đổi | Có (R4) |
+| F5 | vẫn Khoa, 24; điểm 40; còn 9/12 | Có (quẹt tiếp ván dở) |
+| `mongosh`: swipe của ván hiện tại | 3 lượt: `right, up, right` | Khớp màn hình (10 + 20 + 10 = 40) |
+| Cuộn ngang ở 375px và 320px | 0px | Có ([375px](evidence/e2e-375px.png), [320px](evidence/e2e-320px.png)) |
+| Thứ tự Tab | Ván mới → Bỏ qua → Siêu thích → Thích → Hoàn tác | Có |
+| Cây accessibility | 5 nút đều có tên: "Ván mới", "Bỏ qua", "Siêu thích", "Thích", "Hoàn tác" | Có |
+| Lỗi console | 0 | Có |
+
+Tương phản (tính theo công thức WCAG): chữ màu quẹt trên nền thẻ và nền hover đều từ 5.65:1 trở lên ở cả hai theme; viền control 3.59:1.
+
+### 6.4 Còn lại cho người dùng
+
+- Nghe thử bằng NVDA hoặc Narrator: vùng `<output>` đọc "Đã thích ... Điểm ..." sau mỗi thao tác.
+- Thử kéo bằng cảm ứng thật trên điện thoại (trên máy chỉ thử bằng chuột và Pointer Events).
