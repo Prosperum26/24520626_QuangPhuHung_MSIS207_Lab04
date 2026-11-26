@@ -46,6 +46,7 @@ function reducer(state, action) {
       return {
         ...state,
         stale: false,
+        profiles: action.profiles,
         gameId: action.gameId,
         history: action.history,
         error: action.clearError ? null : state.error,
@@ -97,10 +98,11 @@ export function useSwipeGame() {
   const epochRef = useRef(0); // tăng khi một request ghi lỗi: các task xếp sau sẽ bị bỏ
   const localIdRef = useRef(0);
 
+  // Tải lại cả hồ sơ: chạy seed khi app đang mở sẽ đổi id hồ sơ.
   const resync = useCallback(async (clearError) => {
     try {
-      const { game, swipes } = await fetchCurrentGame();
-      dispatch({ type: 'SYNCED', gameId: game.id, history: swipes, clearError });
+      const [syncedProfiles, { game, swipes }] = await Promise.all([fetchProfiles(), fetchCurrentGame()]);
+      dispatch({ type: 'SYNCED', profiles: syncedProfiles, gameId: game.id, history: swipes, clearError });
     } catch (err) {
       dispatch({ type: 'SYNC_FAILED', error: describeError(err) });
     }

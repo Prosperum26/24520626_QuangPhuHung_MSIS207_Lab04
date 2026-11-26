@@ -172,6 +172,23 @@ describe('useSwipeGame: lỗi và đồng bộ lại', () => {
     expect(result.current.error).toBeNull();
   });
 
+  it('seed lại khi app đang mở: đồng bộ lại cả hồ sơ, quẹt tiếp được với id mới', async () => {
+    const { result, server } = await setup();
+    // Mô phỏng npm run seed: hồ sơ có id mới, mọi ván và lượt quẹt bị xoá.
+    server.db.profiles.splice(0, Infinity, profile('n1', 'An'), profile('n2', 'Bình', 'male'));
+    server.db.games.length = 0;
+    server.db.swipes.length = 0;
+
+    await swipe(result, 'right'); // gửi game và profile cũ → 404
+    await waitFor(() => expect(result.current.error).toMatch(/Game not found/));
+    await waitFor(() => expect(result.current.current?.id).toBe('n1'));
+    expect(result.current.deck.map((p) => p.id)).toEqual(['n1', 'n2']);
+
+    await swipe(result, 'left');
+    await waitFor(() => expect(server.db.swipes).toMatchObject([{ profileId: 'n1', direction: 'left' }]));
+    expect(result.current.error).toBeNull();
+  });
+
   it('lỗi ở một request thì bỏ các request ghi đang xếp hàng sau nó', async () => {
     const { result, server } = await setup();
     server.state.hold = true;
